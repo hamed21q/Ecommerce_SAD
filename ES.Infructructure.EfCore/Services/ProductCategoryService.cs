@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ES.Domain.ProductCategory;
+using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore.Services
 {
-    public class ProductCategoryService
+    public class ProductCategoryService : Repository<long, ProductCategory>, IProductCategoryService
     {
+        public ProductCategoryService(DbContext context) : base(context)
+        {
+
+        }
     }
 }
