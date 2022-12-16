@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Domain", "CS.Domain\ES.Domain.csproj", "{EEF0ABBB-C9CA-4DEA-AFA3-1DF0390A7659}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Domain", "CS.Domain\ES.Domain.csproj", "{EEF0ABBB-C9CA-4DEA-AFA3-1DF0390A7659}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Application", "ES.Application\ES.Application.csproj", "{20941512-095D-419A-A935-50B102BD5867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Application", "ES.Application\ES.Application.csproj", "{20941512-095D-419A-A935-50B102BD5867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Application.Contracts", "ES.Application.Contracts\ES.Application.Contracts.csproj", "{20CAC82C-5DBE-46EA-93F6-E348C1FF482A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Application.Contracts", "ES.Application.Contracts\ES.Application.Contracts.csproj", "{20CAC82C-5DBE-46EA-93F6-E348C1FF482A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Infructructure.EfCore", "ES.Infructructure.EfCore\ES.Infructructure.EfCore.csproj", "{2137AFAF-9925-4966-AB86-810F4DFEF5CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Infructructure.EfCore", "ES.Infructructure.EfCore\ES.Infructructure.EfCore.csproj", "{2137AFAF-9925-4966-AB86-810F4DFEF5CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Infrustructure.Core", "ES.Infrustructure.Core\ES.Infrustructure.Core.csproj", "{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Infrustructure.Core", "ES.Infrustructure.Core\ES.Infrustructure.Core.csproj", "{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Presentation", "ES.Presentation\ES.Presentation.csproj", "{B9E8E23D-9EE7-4011-9227-153DB7CCE896}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Presentation", "ES.Presentation\ES.Presentation.csproj", "{70D58938-1A98-48DF-8CD2-A0047BEA2449}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9E8E23D-9EE7-4011-9227-153DB7CCE896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9E8E23D-9EE7-4011-9227-153DB7CCE896}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9E8E23D-9EE7-4011-9227-153DB7CCE896}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9E8E23D-9EE7-4011-9227-153DB7CCE896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D58938-1A98-48DF-8CD2-A0047BEA2449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D58938-1A98-48DF-8CD2-A0047BEA2449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D58938-1A98-48DF-8CD2-A0047BEA2449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D58938-1A98-48DF-8CD2-A0047BEA2449}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

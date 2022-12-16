@@ -8,5 +8,6 @@ namespace ES.Application.Contracts.ProductCategory
 {
     public interface IProductCategoryApplication
     {
+        void Add(CreateProductCategoryCommand command);
     }
 }

@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ES.Application.Contracts\ES.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ES.Application\ES.Application.csproj" />
+    <ProjectReference Include="..\ES.Infructructure.EfCore\ES.Infructructure.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>
