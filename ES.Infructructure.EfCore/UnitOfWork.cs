@@ -12,24 +12,14 @@ namespace ES.Infructructure.EfCore
     {
         private readonly DbContext dbContext;
 
-        public UnitOfWork(DbContext dbContext)
+        public UnitOfWork(EcommerceContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public void BeginTran()
+        public void Save()
         {
-            dbContext.Database.BeginTransaction();
-        }
-
-        public void CommitTran()
-        {
-            dbContext.Database.CommitTransaction(); 
-        }
-
-        public void RollBack()
-        {
-            dbContext.Database.RollbackTransaction();
+            dbContext.SaveChanges();
         }
     }
 }

@@ -18,9 +18,9 @@ namespace ES.Presentation.Controllers
 
         // GET: api/<ProductCategory>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ProductCategoryViewModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return productCategoryApplication.GetAll();
         }
 
         // GET api/<ProductCategoryController>/5

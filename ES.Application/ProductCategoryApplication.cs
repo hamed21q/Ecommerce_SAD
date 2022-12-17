@@ -17,10 +17,22 @@ namespace ES.Application
 
         public void Add(CreateProductCategoryCommand command)
         {
-            unitOfWork.BeginTran();
             var productCategory = new ProductCategory(command.Title, command.Parent);
             productCategoryService.Add(productCategory);
-            unitOfWork.CommitTran();
+            unitOfWork.Save();
+        }
+
+        public List<ProductCategoryViewModel> GetAll()
+        {
+            var list = productCategoryService.GetAll();
+            var viewModel = new List<ProductCategoryViewModel>();
+            foreach (var item in list)
+            {
+                viewModel.Add(new ProductCategoryViewModel { 
+                    Title = item.Title, Parent = item.Parent.Title
+                });
+            }
+            return viewModel;
         }
     }
 }

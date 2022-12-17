@@ -5,7 +5,7 @@ namespace ES.Infructructure.EfCore.Services
 {
     public class ProductCategoryService : Repository<long, ProductCategory>, IProductCategoryService
     {
-        public ProductCategoryService(DbContext context) : base(context)
+        public ProductCategoryService(EcommerceContext context) : base(context)
         {
 
         }

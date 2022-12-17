@@ -8,8 +8,6 @@ namespace ES.Domain
 {
     public interface IUnitOfWork
     {
-        void BeginTran();
-        void CommitTran();
-        void RollBack();
+        void Save();
     }
 }
