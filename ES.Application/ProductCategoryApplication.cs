@@ -9,7 +9,10 @@ namespace ES.Application
         private readonly IProductCategoryService productCategoryService;
         private readonly IUnitOfWork unitOfWork;
 
-        public ProductCategoryApplication(IProductCategoryService productCategoryService, IUnitOfWork unitOfWork)
+        public ProductCategoryApplication(
+            IProductCategoryService productCategoryService,
+            IUnitOfWork unitOfWork
+        )
         {
             this.productCategoryService = productCategoryService;
             this.unitOfWork = unitOfWork;
@@ -33,6 +36,11 @@ namespace ES.Application
                 });
             }
             return viewModel;
+        }
+
+        public bool IsValid(long id)
+        {
+            return productCategoryService.Exist(x => x.Id == id);
         }
     }
 }

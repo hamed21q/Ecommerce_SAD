@@ -6,22 +6,35 @@ using ES.Infructructure.EfCore.Services;
 using ES.Infructructure.EfCore;
 using ES.Infrustructure.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using ES.Application.Contracts.ProductCategory.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(x =>
+    {
+        x.ImplicitlyValidateChildProperties = true;
+    });
+
+builder.Services.AddTransient<IValidator<CreateProductCategoryCommand>, CreateProductCategoryCommandValidation>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddTransient<IProductCategoryApplication, ProductCategoryApplication>();
-
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+
 builder.Services.AddDbContext<EcommerceContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

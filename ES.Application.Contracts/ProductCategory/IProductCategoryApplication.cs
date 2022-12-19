@@ -10,5 +10,6 @@ namespace ES.Application.Contracts.ProductCategory
     {
         void Add(CreateProductCategoryCommand command);
         List<ProductCategoryViewModel> GetAll();
+        bool IsValid(long id);
     }
 }

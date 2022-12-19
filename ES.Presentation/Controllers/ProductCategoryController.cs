@@ -11,7 +11,9 @@ namespace ES.Presentation.Controllers
     {
         private readonly IProductCategoryApplication productCategoryApplication;
 
-        public ProductCategoryController(IProductCategoryApplication productCategoryApplication)
+        public ProductCategoryController(
+            IProductCategoryApplication productCategoryApplication
+        )
         {
             this.productCategoryApplication = productCategoryApplication;
         }
@@ -32,9 +34,10 @@ namespace ES.Presentation.Controllers
 
         // POST api/<ProductCategoryController>
         [HttpPost]
-        public void Post(CreateProductCategoryCommand command)
+        public IActionResult Post([FromBody] CreateProductCategoryCommand command)
         {
             productCategoryApplication.Add(command);
+            return Ok();
         }
 
         // PUT api/<ProductCategoryController>/5
