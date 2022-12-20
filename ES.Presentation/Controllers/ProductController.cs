@@ -33,9 +33,10 @@ namespace ES.Presentation.Controllers
 
         // POST api/<ProductController>
         [HttpPost("Create")]
-        public void Post([FromBody] CreateProductCommand command)
+        public IActionResult Post([FromBody] CreateProductCommand command)
         {
-
+            productApplication.Add(command);
+            return Ok();
         }
 
         // PUT api/<ProductController>/5

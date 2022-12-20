@@ -24,7 +24,7 @@ namespace ES.Application
         }
         public bool IsValid(long id)
         {
-            return productService.Exist(id => id.Equals(id));
+            return productService.Exist(x => x.Id == id);
         }
     }
 }

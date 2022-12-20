@@ -20,7 +20,8 @@ namespace ES.Infructructure.EfCore
 
         public bool Exist(Expression<Func<T, bool>> expr)
         {
-            return _context.Set<T>().Any(expr);
+            bool result = _context.Set<T>().Any(expr);
+            return result;
         }
 
         public ICollection<T> GetAll()

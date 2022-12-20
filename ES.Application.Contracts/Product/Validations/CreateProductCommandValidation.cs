@@ -1,4 +1,5 @@
 ﻿using ES.Application.Contracts.Product.DTOs;
+using ES.Application.Contracts.ProductCategory;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ namespace ES.Application.Contracts.Product.Validations
 {
     public class CreateProductCommandValidation : AbstractValidator<CreateProductCommand>
     {
-        private readonly IProductApplication productApplication;
-        public CreateProductCommandValidation(IProductApplication productApplication)
+        private readonly IProductCategoryApplication productCategoryApplication;
+        public CreateProductCommandValidation(IProductCategoryApplication productApplication)
         {
-            this.productApplication = productApplication;
+            this.productCategoryApplication = productApplication;
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Image).NotEmpty();
-            RuleFor(x => x.CategoryId).NotEmpty().Must(categoryId => productApplication.IsValid(categoryId));
+            RuleFor(x => x.CategoryId).Must(id => productApplication.IsValid(id));
         }
     }
 }
