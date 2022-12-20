@@ -14,7 +14,7 @@ namespace ES.Application.Contracts.ProductCategory
         List<ProductCategoryViewModel> GetAll();
         bool IsValid(long id);
         ProductCategoryViewModel GetBy(long id);
-        void Rename(RenameProductCategoryCommand command);
+        void Edit(EditProductCategoryCommand command);
         void Remove(long id);
         void Activate(long id);
     }

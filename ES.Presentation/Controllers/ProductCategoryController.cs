@@ -38,9 +38,9 @@ namespace ES.Presentation.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] RenameProductCategoryCommand command)
+        public IActionResult Put([FromBody] EditProductCategoryCommand command)
         {
-            productCategoryApplication.Rename(command);
+            productCategoryApplication.Edit(command);
             return Ok();
         }
 

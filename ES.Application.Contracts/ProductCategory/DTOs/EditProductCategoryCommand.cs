@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ES.Application.Contracts.ProductCategory.DTOs
 {
-    public class RenameProductCategoryCommand
+    public class EditProductCategoryCommand
     {
         public long Id { get; set; }
         public string Title { get; set; }

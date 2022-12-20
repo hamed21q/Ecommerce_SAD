@@ -3,7 +3,6 @@ using ES.Application.Contracts.ProductCategory.DTOs;
 using ES.Application.Contracts.ProductCategory.ViewModels;
 using ES.Domain;
 using ES.Domain.Entities.ProductCategory;
-using ES.Domain.ProductCategory;
 using System.Globalization;
 
 namespace ES.Application
@@ -24,7 +23,8 @@ namespace ES.Application
 
         public void Add(CreateProductCategoryCommand command)
         {
-            var productCategory = new ProductCategory(command.Title, command.Parent);
+            var parentGrade = productCategoryService.GetBy(command.Parent).Grade;
+            var productCategory = new ProductCategory(command.Title, command.Parent, ++parentGrade);
             productCategoryService.Add(productCategory);
             unitOfWork.Save();
         }
@@ -52,7 +52,8 @@ namespace ES.Application
                     CreationDate = item.CreationDate.ToString(CultureInfo.InvariantCulture),
                     IsDeleted = item.IsDeleted,
                     Title = item.Title,
-                    Parent = item.Parent?.Title
+                    Parent = item.Parent?.Id,
+                    Grade = item.Grade
                 });
             }
             return viewModel;
@@ -67,7 +68,8 @@ namespace ES.Application
                 CreationDate = productCategory.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Title = productCategory.Title,
                 IsDeleted = productCategory.IsDeleted,
-                Parent = productCategory.Parent?.Title
+                Parent = productCategory.Parent?.Id,
+                Grade = productCategory.Grade
             };
         }
 
@@ -76,10 +78,11 @@ namespace ES.Application
             return productCategoryService.Exist(x => x.Id == id);
         }
 
-        public void Rename(RenameProductCategoryCommand command)
+        public void Edit(EditProductCategoryCommand command)
         {
             var productCategory = productCategoryService.GetBy(command.Id);
-            productCategory.Rename(command.Parent, command.Title);
+            var parentGrade = productCategoryService.GetBy(command.Parent).Grade;
+            productCategory.Edit(command.Parent, command.Title, parentGrade++);
             unitOfWork.Save();
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ES.Application.Contracts.ProductCategory.Validations
 {
-    public class RenameProductCategoryCommandValidation : AbstractValidator<RenameProductCategoryCommand>
+    public class RenameProductCategoryCommandValidation : AbstractValidator<EditProductCategoryCommand>
     {
         private readonly IProductCategoryApplication productCategoryApplication;
         public RenameProductCategoryCommandValidation(IProductCategoryApplication productCategoryApplication)

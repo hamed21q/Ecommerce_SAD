@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ES.Application.Contracts.Product.DTOs;
+using ES.Application.Contracts.ProductCategory.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,7 @@ namespace ES.Application.Contracts.Product
 {
     public interface IProductApplication
     {
+        void Add(CreateProductCommand command);
+        bool IsValid(long id);
     }
 }

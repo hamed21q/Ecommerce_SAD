@@ -10,5 +10,13 @@ namespace ES.Domain.Entities.Product
 
         //Navigation
         public virtual ProductCategory.ProductCategory Category { get; private set; }
+        protected Product() { }
+        public Product(string name, string description, long categoryId, string image)
+        {
+            Name = name;
+            Description = description;
+            CategoryId = categoryId;
+            Image = image;
+        }
     }
 }

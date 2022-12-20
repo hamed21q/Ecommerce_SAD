@@ -19,10 +19,11 @@ namespace ES.Infructructure.EfCore.Mappings
             builder.Property(x => x.IsDeleted);
             builder.Property(x => x.CreationDate);
             builder.HasOne(x => x.Parent)
-                .WithMany(x => x.Children)
+                .WithMany(x => x.ChildeCategories)
                 .HasForeignKey(x => x.ParentId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
         }
     }
 }
