@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using ES.Application.Contracts.ProductCategory.DTOs;
+using FluentValidation;
 namespace ES.Application.Contracts.ProductCategory.Validations
 {
     public class CreateProductCategoryCommandValidation : AbstractValidator<CreateProductCategoryCommand>

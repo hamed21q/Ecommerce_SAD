@@ -1,4 +1,4 @@
-﻿namespace ES.Application.Contracts.ProductCategory
+﻿namespace ES.Application.Contracts.ProductCategory.DTOs
 {
     public class CreateProductCategoryCommand
     {

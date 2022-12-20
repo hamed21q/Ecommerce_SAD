@@ -6,11 +6,11 @@ namespace ES.Domain.ProductCategory
     {
         public string Title { get; private set; }
         public bool IsDeleted { get; private set; }
-        public long ParentId { get; private set; }
+        public long? ParentId { get; private set; }
 
 
-        public ProductCategory Parent { get; private set; }
-        public List<ProductCategory> Children { get; private set; } = new List<ProductCategory>();
+        public virtual ProductCategory Parent { get; private set; }
+        public virtual List<ProductCategory> Children { get; private set; } = new List<ProductCategory>();
 
         public ProductCategory(string title, long parent) : base()
         {
@@ -22,10 +22,20 @@ namespace ES.Domain.ProductCategory
         {
 
         }
-        public void Edit(long parent, string title)
+        public void Rename(long parent, string title)
         {
             ParentId = parent;
             Title = title;
         }
+        public void Remove()
+        {
+            this.IsDeleted = true;
+        }
+        public void Activate() 
+        {
+            this.IsDeleted = false;
+        }
+
+
     }
 }

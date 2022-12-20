@@ -7,7 +7,6 @@ namespace ES.Infructructure.EfCore.Services
     {
         public ProductCategoryService(EcommerceContext context) : base(context)
         {
-
         }
     }
 }

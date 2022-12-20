@@ -1,4 +1,5 @@
 ﻿using ES.Domain;
+using ES.Domain.ProductCategory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

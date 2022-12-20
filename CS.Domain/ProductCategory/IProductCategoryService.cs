@@ -8,6 +8,5 @@ namespace ES.Domain.ProductCategory
 {
     public interface IProductCategoryService : IRepository<long, ProductCategory>
     {
-
     }
 }

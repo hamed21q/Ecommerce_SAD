@@ -1,7 +1,8 @@
 ﻿using ES.Application.Contracts.ProductCategory;
+using ES.Application.Contracts.ProductCategory.DTOs;
+using ES.Application.Contracts.ProductCategory.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ES.Presentation.Controllers
 {
@@ -11,28 +12,24 @@ namespace ES.Presentation.Controllers
     {
         private readonly IProductCategoryApplication productCategoryApplication;
 
-        public ProductCategoryController(
-            IProductCategoryApplication productCategoryApplication
-        )
+        public ProductCategoryController(IProductCategoryApplication productCategoryApplication)
         {
             this.productCategoryApplication = productCategoryApplication;
         }
 
-        // GET: api/<ProductCategory>
         [HttpGet]
         public IEnumerable<ProductCategoryViewModel> Get()
         {
-            return productCategoryApplication.GetAll();
+            var list = productCategoryApplication.GetAll();
+            return list;
         }
 
-        // GET api/<ProductCategoryController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ProductCategoryViewModel Get(long id)
         {
-            return "value";
+            return productCategoryApplication.GetBy(id);
         }
 
-        // POST api/<ProductCategoryController>
         [HttpPost]
         public IActionResult Post([FromBody] CreateProductCategoryCommand command)
         {
@@ -40,16 +37,24 @@ namespace ES.Presentation.Controllers
             return Ok();
         }
 
-        // PUT api/<ProductCategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] RenameProductCategoryCommand command)
         {
+            productCategoryApplication.Rename(command);
+            return Ok();
         }
 
-        // DELETE api/<ProductCategoryController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(long id)
         {
+            productCategoryApplication.Remove(id);
+            return Ok();
+        }
+        [HttpPost("Activate")]
+        public IActionResult Activate(long id)
+        {
+            productCategoryApplication.Activate(id);
+            return Ok();
         }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using ES.Application.Contracts.ProductCategory.Validations;
+using ES.Application.Contracts.ProductCategory.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddTransient<IValidator<CreateProductCategoryCommand>, CreateProductCategoryCommandValidation>();
+builder.Services.AddTransient<IValidator<RenameProductCategoryCommand>, RenameProductCategoryCommandValidation>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,7 +34,9 @@ builder.Services.AddTransient<IProductCategoryApplication, ProductCategoryApplic
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
-builder.Services.AddDbContext<EcommerceContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
+builder.Services.AddDbContext<EcommerceContext>(option => option
+    .UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
 
 
 var app = builder.Build();
