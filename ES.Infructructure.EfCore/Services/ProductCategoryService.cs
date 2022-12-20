@@ -1,4 +1,4 @@
-﻿using ES.Domain.ProductCategory;
+﻿using ES.Domain.Entities.ProductCategory;
 using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore.Services

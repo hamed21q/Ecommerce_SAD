@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Product
+namespace ES.Application.Contracts.Product
 {
-    public class Product
+    public interface IProductApplication
     {
-
     }
 }

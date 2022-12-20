@@ -2,6 +2,7 @@
 using ES.Application.Contracts.ProductCategory.DTOs;
 using ES.Application.Contracts.ProductCategory.ViewModels;
 using ES.Domain;
+using ES.Domain.Entities.ProductCategory;
 using ES.Domain.ProductCategory;
 using System.Globalization;
 

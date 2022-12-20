@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.ProductCategory
+namespace ES.Domain.Entities.ProductCategory
 {
     public interface IProductCategoryService : IRepository<long, ProductCategory>
     {

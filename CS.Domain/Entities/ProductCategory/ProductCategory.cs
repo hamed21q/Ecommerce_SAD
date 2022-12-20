@@ -1,6 +1,4 @@
-﻿
-
-namespace ES.Domain.ProductCategory
+﻿namespace ES.Domain.Entities.ProductCategory
 {
     public class ProductCategory : BaseDomain
     {
@@ -29,11 +27,11 @@ namespace ES.Domain.ProductCategory
         }
         public void Remove()
         {
-            this.IsDeleted = true;
+            IsDeleted = true;
         }
-        public void Activate() 
+        public void Activate()
         {
-            this.IsDeleted = false;
+            IsDeleted = false;
         }
 
 

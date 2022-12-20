@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.ProductCategory.Exceptions
+namespace ES.Domain.Entities.ProductCategory.Exceptions
 {
     public class InValidParentCategoryException : Exception
     {
