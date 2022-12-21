@@ -1,4 +1,5 @@
 ﻿using ES.Domain.Entities.ProductCategory;
+using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore.Services
@@ -7,6 +8,7 @@ namespace ES.Infructructure.EfCore.Services
     {
         public ProductCategoryService(EcommerceContext context) : base(context)
         {
+
         }
     }
 }

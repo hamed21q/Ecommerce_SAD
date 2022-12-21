@@ -1,4 +1,5 @@
 ﻿using ES.Application.Contracts.Product.DTOs;
+using ES.Application.Contracts.Product.ViewModels;
 using ES.Application.Contracts.ProductCategory.DTOs;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,9 @@ namespace ES.Application.Contracts.Product
     {
         void Add(CreateProductCommand command);
         bool IsValid(long id);
+        void Edit(EditProductCommand command);
+        ProductViewModel GetBy(long id);
+        List<ProductViewModel> GetByCategory(long id);
+        void Delete(long id);
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain
+namespace ES.Domain.DomainService
 {
     public interface IUnitOfWork
     {

@@ -1,7 +1,7 @@
 ﻿using ES.Application.Contracts.ProductCategory;
 using ES.Application.Contracts.ProductCategory.DTOs;
 using ES.Application.Contracts.ProductCategory.ViewModels;
-using ES.Domain;
+using ES.Domain.DomainService;
 using ES.Domain.Entities.ProductCategory;
 using System.Globalization;
 
@@ -82,7 +82,7 @@ namespace ES.Application
         {
             var productCategory = productCategoryService.GetBy(command.Id);
             var parentGrade = productCategoryService.GetBy(command.Parent).Grade;
-            productCategory.Edit(command.Parent, command.Title, parentGrade++);
+            productCategory.Edit(command.Parent, command.Title, ++parentGrade);
             unitOfWork.Save();
         }
     }

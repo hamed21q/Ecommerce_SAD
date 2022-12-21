@@ -1,5 +1,6 @@
 ﻿using ES.Application.Contracts.Product;
 using ES.Application.Contracts.Product.DTOs;
+using ES.Application.Contracts.Product.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,20 +18,6 @@ namespace ES.Presentation.Controllers
             this.productApplication = productApplication;
         }
 
-        // GET: api/<ProductController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<ProductController>
         [HttpPost("Create")]
         public IActionResult Post([FromBody] CreateProductCommand command)
@@ -40,15 +27,44 @@ namespace ES.Presentation.Controllers
         }
 
         // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Edit")]
+        public IActionResult Put([FromBody] EditProductCommand command)
         {
+            productApplication.Edit(command);
+            return Ok();
         }
+        [HttpGet("ProductsByCategory")]
+        public List<ProductViewModel> GetByCategoryId(long id)
+        {
+            try
+            {
+                return productApplication.GetByCategory(id);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(long id)
         {
+            try
+            {
+                productApplication.Delete(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpGet("id")]
+        public ProductViewModel GetBy(long id)
+        {
+            return productApplication.GetBy(id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using ES.Domain;
+﻿using ES.Domain.DomainService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Infructructure.EfCore
+namespace ES.Infructructure.EfCore.Base
 {
     public class UnitOfWork : IUnitOfWork
     {

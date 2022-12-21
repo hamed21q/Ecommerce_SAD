@@ -18,5 +18,12 @@ namespace ES.Domain.Entities.Product
             CategoryId = categoryId;
             Image = image;
         }
+        public void Edit(string name, string description, long categoryId, string image)
+        {
+            Name = name;
+            Description = description;
+            CategoryId = categoryId;
+            Image = image;
+        }
     }
 }
