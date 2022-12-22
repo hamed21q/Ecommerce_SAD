@@ -14,5 +14,10 @@ namespace ES.Infructructure.EfCore.Services
         public ProductVariationService(EcommerceContext context) : base(context)
         {
         }
+
+        public List<ProductVariation> GetByCategory(long categoryId)
+        {
+            return _context.Set<ProductVariation>().Where(v => v.CategoryId== categoryId).ToList();
+        }
     }
 }

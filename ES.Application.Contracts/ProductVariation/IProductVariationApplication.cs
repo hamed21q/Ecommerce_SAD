@@ -10,10 +10,12 @@ namespace ES.Application.Contracts.ProductVariation
 {
     public interface IProductVariationApplication
     {
-        ProductVariationViewModel GetBy(long id);
+        
         void Add(CreateProductVariationCommand command);
         void Edit(EditProductVariationCommand command);
+        ProductVariationViewModel GetBy(long id);
         List<ProductVariationViewModel> GetAll();
+        List<ProductVariationViewModel> GetByCategory(long categoryId);
         void Remove(long id);
         bool IsValid(long id);
     }

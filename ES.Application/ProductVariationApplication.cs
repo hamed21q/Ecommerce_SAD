@@ -58,6 +58,22 @@ namespace ES.Application
             };
         }
 
+        public List<ProductVariationViewModel> GetByCategory(long categoryId)
+        {
+            var list = productVariationService.GetByCategory(categoryId);
+            var view = new List<ProductVariationViewModel>();
+            foreach (var item in list)
+            {
+                view.Add(new ProductVariationViewModel
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    CategoryId = item.CategoryId
+                });
+            }
+            return view;
+        }
+
         public bool IsValid(long id)
         {
             return productVariationService.Exist(x => x.Id == id);
