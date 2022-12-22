@@ -12,6 +12,17 @@ namespace ES.Domain.Entities.ProductVariation
         public string Name { get; private set; }
 
         //navigation
-        public virtual ProductCategory.ProductCategory Category { get; private set; }
+        public virtual ProductCategory.ProductCategory Category { get; set; }
+
+        public ProductVariation(long categoryId, string name)
+        {
+            CategoryId = categoryId;
+            Name = name;
+        }
+        public void Edit(long categoryId, string name)
+        {
+            CategoryId = categoryId;
+            Name = name;
+        }
     }
 }

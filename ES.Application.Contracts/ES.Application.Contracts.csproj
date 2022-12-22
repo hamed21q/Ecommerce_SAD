@@ -10,10 +10,4 @@
     <PackageReference Include="FluentValidation" Version="11.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ProductVariation\DTOs\" />
-    <Folder Include="ProductVariation\Validations\" />
-    <Folder Include="ProductVariation\ViewModels\" />
-  </ItemGroup>
-
 </Project>
