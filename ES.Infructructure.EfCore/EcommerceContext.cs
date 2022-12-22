@@ -1,6 +1,7 @@
 ﻿using ES.Domain.Entities.Product;
 using ES.Domain.Entities.ProductCategory;
 using ES.Domain.Entities.ProductVariation;
+using ES.Domain.Entities.ProductVariationOption;
 using ES.Infructructure.EfCore.Mappings;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace ES.Infructructure.EfCore
         public DbSet<ProductCategory> productCategories { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<ProductVariation> ProductVariations { get; set; }
+        public DbSet<ProductVariationOption> productVariationOptions { get; set; }
         public EcommerceContext(DbContextOptions<EcommerceContext> context) : base(context) 
         {
 

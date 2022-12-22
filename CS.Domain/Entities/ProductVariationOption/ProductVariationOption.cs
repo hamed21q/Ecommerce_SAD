@@ -12,8 +12,8 @@ namespace ES.Domain.Entities.ProductVariationOption
         public string Value { get; set; }
 
         //navigation
-        public ProductVariation.ProductVariation Variation { get; set; }
-        public ProductVariationOption(long variationId, string value)
+        public virtual ProductVariation.ProductVariation Variation { get; set; }
+        public ProductVariationOption(long variationId, string value) : base()
         {
             VariationId = variationId;
             Value = value;

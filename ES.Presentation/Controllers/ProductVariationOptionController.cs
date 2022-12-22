@@ -18,7 +18,7 @@ namespace ES.Presentation.Controllers
         {
             this.productVariationOptionApplication = productVariationOptionApplication;
         }
-
+        [HttpGet]
         public ProductVariationOptionViewModel Get(long id)
         {
             return productVariationOptionApplication.GetBy(id);

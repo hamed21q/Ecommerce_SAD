@@ -16,6 +16,12 @@ using ES.Domain.DomainService;
 using ES.Infructructure.EfCore.Base;
 using ES.Application.Contracts.ProductVariation;
 using ES.Domain.Entities.ProductVariation;
+using ES.Application.Contracts.ProductVariation.DTOs;
+using ES.Application.Contracts.ProductVariation.Validations;
+using ES.Application.Contracts.ProductVariationOption.DTOs;
+using ES.Application.Contracts.ProductVariationOption.Validations;
+using ES.Application.Contracts.ProductVariationOption;
+using ES.Domain.Entities.ProductVariationOption;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +37,13 @@ builder.Services.AddControllers()
 builder.Services.AddTransient<IValidator<CreateProductCategoryCommand>, CreateProductCategoryCommandValidation>();
 builder.Services.AddTransient<IValidator<EditProductCategoryCommand>, RenameProductCategoryCommandValidation>();
 builder.Services.AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidation>();
+builder.Services.AddTransient<IValidator<CreateProductVariationCommand>, CreateProdctVariationValidation>();
+builder.Services.AddTransient<IValidator<EditProductVariationCommand>, EditProductVariationValidation>();
+builder.Services.AddTransient<IValidator<EditProductVariationOptionCommand>, EditProductVariatioOptionValidation>();
+builder.Services.AddTransient<IValidator<CreateProductVariationOptionCommand>, CreateProductVariatioOptionValidation>();
+
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +60,10 @@ builder.Services.AddTransient<IProductService, ProductService>();
 //product variation
 builder.Services.AddTransient<IProductVariationApplication, ProductVariationApplication>();
 builder.Services.AddTransient<IProductVariationService, ProductVariationService>();
+
+//product variation option
+builder.Services.AddTransient<IProductVariationOptionApplication, ProductVariationOptionApplication>();
+builder.Services.AddTransient<IProductVariationOptionService, ProductVariationOptionService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 

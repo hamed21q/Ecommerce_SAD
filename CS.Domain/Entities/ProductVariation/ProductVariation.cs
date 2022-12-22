@@ -14,7 +14,7 @@ namespace ES.Domain.Entities.ProductVariation
         //navigation
         public virtual ProductCategory.ProductCategory Category { get; set; }
         public virtual List<ProductVariationOption.ProductVariationOption> ProductVariationOptions { get; set; }
-        public ProductVariation(long categoryId, string name)
+        public ProductVariation(long categoryId, string name) : base()
         {
             ProductVariationOptions = new List<ProductVariationOption.ProductVariationOption>();
             CategoryId = categoryId;

@@ -11,7 +11,7 @@ namespace ES.Infructructure.EfCore.Services
 {
     public class ProductVariationOptionService : Repository<long, ProductVariationOption>, IProductVariationOptionService
     {
-        public ProductVariationOptionService(DbContext context) : base(context)
+        public ProductVariationOptionService(EcommerceContext context) : base(context)
         {
         }
 

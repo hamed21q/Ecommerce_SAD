@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ES.Application.Contracts.ProductVariationOption.DTOs;
+using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace ES.Application.Contracts.ProductVariationOption.Validations
 {
-    public class EditProductVariatioOptionValidation
+    public class EditProductVariatioOptionValidation : AbstractValidator<EditProductVariationOptionCommand>
     {
+        public EditProductVariatioOptionValidation()
+        {
 
+        }
     }
 }

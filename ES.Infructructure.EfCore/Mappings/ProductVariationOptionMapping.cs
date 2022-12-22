@@ -18,7 +18,8 @@ namespace ES.Infructructure.EfCore.Mappings
             builder.Property(x => x.Value);
             builder.HasOne(x => x.Variation)
                 .WithMany(x => x.ProductVariationOptions)
-                .HasForeignKey(x => x.VariationId);
+                .HasForeignKey(x => x.VariationId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
