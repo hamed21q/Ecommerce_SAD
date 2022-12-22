@@ -8,11 +8,15 @@
         public int Grade { get; private set; }
 
         public virtual ProductCategory Parent { get; private set; }
-        public virtual List<ProductCategory> ChildeCategories { get; private set; } = new List<ProductCategory>();
+        public virtual List<ProductCategory> ChildeCategories { get; private set; }
         public virtual List<Product.Product> Products { get; private set; }
+        public virtual List<ProductVariation.ProductVariation> ProductVariations { get; private set; }
 
         public ProductCategory(string title, long parent, int grade) : base()
         {
+            ChildeCategories= new List<ProductCategory>();
+            Products = new List<Product.Product>();
+            ProductVariations = new List<ProductVariation.ProductVariation>();
             Title = title;
             ParentId = parent;
             IsDeleted = false;

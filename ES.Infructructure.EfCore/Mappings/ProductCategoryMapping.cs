@@ -23,7 +23,9 @@ namespace ES.Infructructure.EfCore.Mappings
                 .HasForeignKey(x => x.ParentId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
+            builder.HasMany(x => x.Products)
+                .WithOne(x => x.Category)
+                .HasForeignKey(x => x.CategoryId);
         }
     }
 }
