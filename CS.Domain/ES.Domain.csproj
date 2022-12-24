@@ -10,8 +10,4 @@
     <PackageReference Include="FluentValidation" Version="11.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ES.Application.Contracts\ES.Application.Contracts.csproj" />
-  </ItemGroup>
-
 </Project>

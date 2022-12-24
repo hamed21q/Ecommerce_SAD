@@ -20,7 +20,12 @@ namespace ES.Infructructure.EfCore.Mappings
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.CategoryId)
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.ProductItems)
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

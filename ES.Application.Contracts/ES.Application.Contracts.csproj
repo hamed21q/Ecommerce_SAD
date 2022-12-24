@@ -10,4 +10,12 @@
     <PackageReference Include="FluentValidation" Version="11.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProductItem\Validations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CS.Domain\ES.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

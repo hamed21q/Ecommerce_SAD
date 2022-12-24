@@ -10,6 +10,7 @@ namespace ES.Domain.Entities.Product
 
         //Navigation
         public virtual ProductCategory.ProductCategory Category { get; private set; }
+        public virtual List<ProductItem.ProductItem> ProductItems { get; private set; } 
         protected Product() { }
         public Product(string name, string description, long categoryId, string image)
         {

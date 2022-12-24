@@ -68,5 +68,17 @@ namespace ES.Application
             productService.Delete(product);
             unitOfWork.Save();
         }
+
+        public ProductViewModel Convert(Product product)
+        {
+            return new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CategoryId = product.CategoryId,
+                Image = product.Image
+            };
+        }
     }
 }
