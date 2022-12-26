@@ -11,5 +11,6 @@ namespace ES.Application.Contracts.Product
         List<ProductViewModel> GetByCategory(long id);
         void Delete(long id);
         ProductViewModel Convert(Domain.Entities.Product.Product product);
+        List<ProductViewModel> GetAll();
     }
 }

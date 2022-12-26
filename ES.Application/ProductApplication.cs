@@ -80,5 +80,23 @@ namespace ES.Application
                 Image = product.Image
             };
         }
+
+        public List<ProductViewModel> GetAll()
+        {
+            var list = productService.GetAll();
+            var viewModels = new List<ProductViewModel>();  
+            foreach (var product in list)
+            {
+                viewModels.Add(new ProductViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    CategoryId = product.CategoryId,
+                    Image = product.Image
+                });
+            }
+            return viewModels;
+        }
     }
 }

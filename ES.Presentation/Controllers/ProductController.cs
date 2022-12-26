@@ -66,5 +66,10 @@ namespace ES.Presentation.Controllers
         {
             return productApplication.GetBy(id);
         }
+        [HttpGet]
+        public List<ProductViewModel> GetAll()
+        {
+            return productApplication.GetAll();
+        }
     }
 }
