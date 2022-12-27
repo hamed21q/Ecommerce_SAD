@@ -1,33 +1,38 @@
-using ES.Application.Contracts.ProductCategory;
-using ES.Application;
-using ES.Infructructure.EfCore.Services;
 using ES.Infructructure.EfCore;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using ES.Application.Contracts.ProductCategory.Validations;
-using ES.Application.Contracts.ProductCategory.DTOs;
-using ES.Application.Contracts.Product.Validations;
-using ES.Application.Contracts.Product.DTOs;
-using ES.Application.Contracts.Product;
 using Microsoft.EntityFrameworkCore;
 using ES.Domain.DomainService;
 using ES.Infructructure.EfCore.Base;
-using ES.Application.Contracts.ProductVariation;
-using ES.Application.Contracts.ProductVariation.DTOs;
-using ES.Application.Contracts.ProductVariation.Validations;
-using ES.Application.Contracts.ProductVariationOption.DTOs;
-using ES.Application.Contracts.ProductVariationOption.Validations;
-using ES.Application.Contracts.ProductVariationOption;
-using ES.Application.Contracts.ProductItem;
-using ES.Application.Contracts.ProductConfiguration;
-using ES.Application.Contracts.ProductItem.DTOs;
-using ES.Application.Contracts.ProductItem.Validations;
 using ES.Domain.Entities.Products.Product;
 using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Domain.Entities.Products.ProductVariation;
 using ES.Domain.Entities.Products.ProductCategory;
 using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Domain.Entities.Products.ProductItem;
+using ES.Infructructure.EfCore.Services.Products;
+using ES.Application.Contracts.Products.ProductVariationOption.DTOs;
+using ES.Application.Contracts.Products.ProductVariationOption.Validations;
+using ES.Application.Contracts.Products.ProductVariationOption;
+using ES.Application.Contracts.Products.ProductVariation.DTOs;
+using ES.Application.Contracts.Products.ProductVariation.Validations;
+using ES.Application.Contracts.Products.ProductVariation;
+using ES.Application.Contracts.Products.ProductCategory.DTOs;
+using ES.Application.Contracts.Products.ProductCategory.Validations;
+using ES.Application.Contracts.Products.ProductCategory;
+using ES.Application.Contracts.Products.Product.DTOs;
+using ES.Application.Contracts.Products.Product.Validations;
+using ES.Application.Contracts.Products.Product;
+using ES.Application.Contracts.Products.ProductItem.DTOs;
+using ES.Application.Contracts.Products.ProductItem.Validations;
+using ES.Application.Contracts.Products.ProductItem;
+using ES.Application.Contracts.Products.ProductConfiguration;
+using ES.Application.Products;
+using ES.Infructructure.EfCore.Services.Products.Products;
+using ES.Application.Contracts.Users.Role;
+using ES.Application.Users;
+using ES.Domain.Entities.Users.Role;
+using ES.Infructructure.EfCore.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +85,9 @@ builder.Services.AddTransient<IProductItemService, ProductItemService>();
 builder.Services.AddTransient<IProductConfigurationApplication, ProductConfigurationApplication>();
 builder.Services.AddTransient<IProductConfigurationService, ProductConfigurationService>();
 
+//user role
+builder.Services.AddTransient<IUserRoleApplication, UserRoleApplication>();
+builder.Services.AddTransient<IUserRoleService, UserRoleService>();
 
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();

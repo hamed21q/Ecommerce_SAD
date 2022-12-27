@@ -1,10 +1,11 @@
-﻿using ES.Application;
-using ES.Application.Contracts.ProductCategory;
+﻿using ES.Application.Contracts.Products.ProductCategory;
+using ES.Application.Products;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Products.ProductCategory;
 using ES.Infructructure.EfCore;
 using ES.Infructructure.EfCore.Base;
-using ES.Infructructure.EfCore.Services;
+using ES.Infructructure.EfCore.Services.Products;
+using ES.Infructructure.EfCore.Services.Products.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -4,19 +4,23 @@ using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Domain.Entities.Products.ProductItem;
 using ES.Domain.Entities.Products.ProductVariation;
 using ES.Domain.Entities.Products.ProductVariationOption;
-using ES.Infructructure.EfCore.Mappings;
+using ES.Domain.Entities.Users.Role;
+using ES.Infructructure.EfCore.Mappings.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore
 {
     public class EcommerceContext : DbContext
     {
+        //products
         public DbSet<ProductCategory> productCategories { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<ProductVariation> ProductVariations { get; set; }
         public DbSet<ProductVariationOption> productVariationOptions { get; set; }
         public DbSet<ProductItem> productItems { get; set; }
         public DbSet<ProductConfiguration> productConfigurations { get; set; }
+        //users
+        public DbSet<UserRole> userRoles { get; set; }
         public EcommerceContext(DbContextOptions<EcommerceContext> context) : base(context) 
         {
 
