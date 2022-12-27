@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ES.Domain.Entities.ProductItem
+﻿namespace ES.Domain.Entities.ProductItem
 {
     public class ProductItem : BaseDomain
     {
@@ -14,6 +8,7 @@ namespace ES.Domain.Entities.ProductItem
 
         //navigation
         public virtual Product.Product Product { get; set; }
+        public virtual List<ProductConfiguration.ProductConfiguration> Configurations { get; set; }
 
         public ProductItem(long productId, int quantity, double price)
         {

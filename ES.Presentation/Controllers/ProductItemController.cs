@@ -49,5 +49,10 @@ namespace ES.Presentation.Controllers
             productItemApplication.Delete(id);
             return Ok();
         }
+        [HttpGet]
+        public List<ProductItemViewModel> GetAll() 
+        {
+            return productItemApplication.GetAll();
+        }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ES.Application.Contracts.ProductConfiguration.DTOs;
+using ES.Application.Contracts.ProductConfiguration.ViewModel;
+using ES.Domain.Entities.ProductConfiguration;
 
 namespace ES.Application.Contracts.ProductConfiguration
 {
     public interface IProductConfigurationApplication
     {
-        void Add(long productItemId, long variationOptionId);
-        void Add(List<long> variations, long itemId);
+        void Add(List<CreateProductConfigurationCommand> variations);
+        void Edit(long id,long productItemId, long variationOptionId);
+        ProductConfigurationViewModel GetBy(long id);
     }
 }

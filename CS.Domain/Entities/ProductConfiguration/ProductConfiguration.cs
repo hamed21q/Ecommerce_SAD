@@ -13,8 +13,13 @@ namespace ES.Domain.Entities.ProductConfiguration
 
         //navigation
         public virtual ProductItem.ProductItem ProductItem{ get; private set; }
-        public virtual ProductVariationOption.ProductVariationOption Variation { get; private set; }
+        public virtual ProductVariationOption.ProductVariationOption VariationOption { get; private set; }
         public ProductConfiguration(long productItemId, long variationOptionId) : base()
+        {
+            ProductItemId = productItemId;
+            VariationOptionId = variationOptionId;
+        }
+        public void Edit(long productItemId, long variationOptionId)
         {
             ProductItemId = productItemId;
             VariationOptionId = variationOptionId;

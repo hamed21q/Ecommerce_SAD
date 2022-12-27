@@ -1,5 +1,6 @@
 ﻿using ES.Domain.Entities.Product;
 using ES.Domain.Entities.ProductCategory;
+using ES.Domain.Entities.ProductConfiguration;
 using ES.Domain.Entities.ProductItem;
 using ES.Domain.Entities.ProductVariation;
 using ES.Domain.Entities.ProductVariationOption;
@@ -15,6 +16,7 @@ namespace ES.Infructructure.EfCore
         public DbSet<ProductVariation> ProductVariations { get; set; }
         public DbSet<ProductVariationOption> productVariationOptions { get; set; }
         public DbSet<ProductItem> productItems { get; set; }
+        public DbSet<ProductConfiguration> productConfigurations { get; set; }
         public EcommerceContext(DbContextOptions<EcommerceContext> context) : base(context) 
         {
 

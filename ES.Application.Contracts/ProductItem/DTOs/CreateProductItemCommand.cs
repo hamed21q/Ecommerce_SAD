@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ES.Application.Contracts.ProductConfiguration.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace ES.Application.Contracts.ProductItem.DTOs
         public long ProductId { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
+        public List<long> configurations { get; set; }
     }
 }

@@ -21,6 +21,11 @@ namespace ES.Infructructure.EfCore.Mappings
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.ProductItems)
                 .HasForeignKey(x => x.ProductId);
+
+            builder.HasMany(x => x.Configurations)
+                .WithOne(x => x.ProductItem)
+                .HasForeignKey(x => x.ProductItemId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

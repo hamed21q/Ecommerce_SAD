@@ -24,6 +24,10 @@ using ES.Application.Contracts.ProductVariationOption;
 using ES.Domain.Entities.ProductVariationOption;
 using ES.Application.Contracts.ProductItem;
 using ES.Domain.Entities.ProductItem;
+using ES.Application.Contracts.ProductConfiguration;
+using ES.Domain.Entities.ProductConfiguration;
+using ES.Application.Contracts.ProductItem.DTOs;
+using ES.Application.Contracts.ProductItem.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +47,7 @@ builder.Services.AddTransient<IValidator<CreateProductVariationCommand>, CreateP
 builder.Services.AddTransient<IValidator<EditProductVariationCommand>, EditProductVariationValidation>();
 builder.Services.AddTransient<IValidator<EditProductVariationOptionCommand>, EditProductVariatioOptionValidation>();
 builder.Services.AddTransient<IValidator<CreateProductVariationOptionCommand>, CreateProductVariatioOptionValidation>();
+builder.Services.AddTransient<IValidator<CreateProductItemCommand>, CreateProductItemValidation>();
 
 
 
@@ -70,6 +75,12 @@ builder.Services.AddTransient<IProductVariationOptionService, ProductVariationOp
 //product item
 builder.Services.AddTransient<IProductItemApplication, ProductItemApplication>();
 builder.Services.AddTransient<IProductItemService, ProductItemService>();
+
+//product Configuration
+builder.Services.AddTransient<IProductConfigurationApplication, ProductConfigurationApplication>();
+builder.Services.AddTransient<IProductConfigurationService, ProductConfigurationService>();
+
+
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 

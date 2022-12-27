@@ -14,5 +14,6 @@ namespace ES.Application.Contracts.ProductItem
         void Edit(EditProductItemCommand command);
         void Delete(long id);
         ProductItemViewModel GetBy(long id);
+        List<ProductItemViewModel> GetAll();
     }
 }

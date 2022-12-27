@@ -1,11 +1,6 @@
 ﻿using ES.Domain.Entities.ProductVariationOption;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Mappings
 {
@@ -16,9 +11,15 @@ namespace ES.Infructructure.EfCore.Mappings
             builder.ToTable("ProductVariationOptions");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Value);
+
             builder.HasOne(x => x.Variation)
                 .WithMany(x => x.ProductVariationOptions)
                 .HasForeignKey(x => x.VariationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.Configurations)
+                .WithOne(x => x.VariationOption)
+                .HasForeignKey(x => x.VariationOptionId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
