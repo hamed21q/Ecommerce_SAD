@@ -6,7 +6,7 @@ using ES.Application.Contracts.ProductItem;
 using ES.Application.Contracts.ProductItem.DTOs;
 using ES.Application.Contracts.ProductItem.ViewModels;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.ProductItem;
+using ES.Domain.Entities.Products.ProductItem;
 
 namespace ES.Application
 {

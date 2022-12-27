@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.ProductConfiguration;
+﻿using ES.Domain.Entities.Products.ProductConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

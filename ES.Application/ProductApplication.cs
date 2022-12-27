@@ -2,7 +2,7 @@
 using ES.Application.Contracts.Product.DTOs;
 using ES.Application.Contracts.Product.ViewModels;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.Product;
+using ES.Domain.Entities.Products.Product;
 
 namespace ES.Application
 {

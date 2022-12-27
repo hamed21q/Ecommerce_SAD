@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ES.Domain.Entities.Products.ProductVariationOption;
 
-namespace ES.Domain.Entities.ProductVariation
+namespace ES.Domain.Entities.Products.ProductVariation
 {
     public class ProductVariation : BaseDomain
     {

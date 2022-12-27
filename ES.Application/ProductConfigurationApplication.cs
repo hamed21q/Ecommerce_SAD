@@ -3,9 +3,8 @@ using ES.Application.Contracts.ProductConfiguration.DTOs;
 using ES.Application.Contracts.ProductConfiguration.ViewModel;
 using ES.Application.Contracts.ProductVariation;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.ProductConfiguration;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
-
+using ES.Domain.Entities.Products.ProductConfiguration;
+    
 namespace ES.Application
 {
     public class ProductConfigurationApplication : IProductConfigurationApplication

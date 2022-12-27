@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.ProductCategory;
+﻿using ES.Domain.Entities.Products.ProductCategory;
 using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
 

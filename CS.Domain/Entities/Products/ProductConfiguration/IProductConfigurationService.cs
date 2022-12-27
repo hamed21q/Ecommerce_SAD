@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.ProductConfiguration
+namespace ES.Domain.Entities.Products.ProductConfiguration
 {
     public interface IProductConfigurationService : IRepository<long, ProductConfiguration>
     {

@@ -1,6 +1,6 @@
 ﻿using ES.Application.Contracts.ProductItem.DTOs;
-using ES.Domain.Entities.ProductItem;
-using ES.Domain.Entities.ProductVariationOption;
+using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductVariationOption;
 using FluentValidation;
 using System.Collections.Generic;
 

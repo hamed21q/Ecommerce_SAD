@@ -1,7 +1,7 @@
 ﻿using ES.Application;
 using ES.Application.Contracts.ProductCategory;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.ProductCategory;
+using ES.Domain.Entities.Products.ProductCategory;
 using ES.Infructructure.EfCore;
 using ES.Infructructure.EfCore.Base;
 using ES.Infructructure.EfCore.Services;

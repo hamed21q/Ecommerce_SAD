@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.ProductConfiguration;
+﻿using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Infructructure.EfCore.Base;
 
 namespace ES.Infructructure.EfCore.Services

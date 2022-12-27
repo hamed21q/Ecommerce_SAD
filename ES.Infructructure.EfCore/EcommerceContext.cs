@@ -1,9 +1,9 @@
-﻿using ES.Domain.Entities.Product;
-using ES.Domain.Entities.ProductCategory;
-using ES.Domain.Entities.ProductConfiguration;
-using ES.Domain.Entities.ProductItem;
-using ES.Domain.Entities.ProductVariation;
-using ES.Domain.Entities.ProductVariationOption;
+﻿using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductCategory;
+using ES.Domain.Entities.Products.ProductConfiguration;
+using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductVariation;
+using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Infructructure.EfCore.Mappings;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,7 @@
 ﻿using ES.Application.Contracts.ProductVariation.DTOs;
 using ES.Application.Contracts.ProductVariation.ViewModels;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.ProductVariation;
+using ES.Domain.Entities.Products.ProductVariation;
 
 namespace ES.Application
 {

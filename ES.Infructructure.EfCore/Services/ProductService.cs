@@ -1,5 +1,5 @@
-﻿using ES.Domain.Entities.Product;
-using ES.Domain.Entities.ProductCategory;
+﻿using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductCategory;
 using ES.Infructructure.EfCore.Base;
 
 namespace ES.Infructructure.EfCore.Services

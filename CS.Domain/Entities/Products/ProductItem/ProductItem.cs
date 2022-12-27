@@ -1,4 +1,7 @@
-﻿namespace ES.Domain.Entities.ProductItem
+﻿using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductConfiguration;
+
+namespace ES.Domain.Entities.Products.ProductItem
 {
     public class ProductItem : BaseDomain
     {

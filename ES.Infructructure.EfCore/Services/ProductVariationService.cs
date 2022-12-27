@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.ProductVariation;
+﻿using ES.Domain.Entities.Products.ProductVariation;
 using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
 using System;

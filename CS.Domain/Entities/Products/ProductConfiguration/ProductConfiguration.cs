@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ES.Domain.Entities.Products.ProductVariationOption;
 
-namespace ES.Domain.Entities.ProductConfiguration
+namespace ES.Domain.Entities.Products.ProductConfiguration
 {
     public class ProductConfiguration : BaseDomain
     {
@@ -12,7 +13,7 @@ namespace ES.Domain.Entities.ProductConfiguration
         public long VariationOptionId { get; private set; }
 
         //navigation
-        public virtual ProductItem.ProductItem ProductItem{ get; private set; }
+        public virtual ProductItem.ProductItem ProductItem { get; private set; }
         public virtual ProductVariationOption.ProductVariationOption VariationOption { get; private set; }
         public ProductConfiguration(long productItemId, long variationOptionId) : base()
         {

@@ -1,4 +1,7 @@
-﻿namespace ES.Domain.Entities.ProductCategory
+﻿using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductVariation;
+
+namespace ES.Domain.Entities.Products.ProductCategory
 {
     public class ProductCategory : BaseDomain
     {
@@ -14,7 +17,7 @@
 
         public ProductCategory(string title, long parent, int grade) : base()
         {
-            ChildeCategories= new List<ProductCategory>();
+            ChildeCategories = new List<ProductCategory>();
             Products = new List<Product.Product>();
             ProductVariations = new List<ProductVariation.ProductVariation>();
             Title = title;

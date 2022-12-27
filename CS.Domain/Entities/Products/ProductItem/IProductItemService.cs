@@ -1,12 +1,13 @@
 ﻿using ES.Domain.DomainService;
-using ES.Domain.Entities.Product;
+using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.ProductItem
+namespace ES.Domain.Entities.Products.ProductItem
 {
     public interface IProductItemService : IRepository<long, ProductItem>
     {

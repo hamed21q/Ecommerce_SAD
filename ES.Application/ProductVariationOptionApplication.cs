@@ -2,6 +2,7 @@
 using ES.Application.Contracts.ProductVariationOption.DTOs;
 using ES.Application.Contracts.ProductVariationOption.ViewModels;
 using ES.Domain.DomainService;
+using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Domain.Entities.ProductVariationOption;
 
 namespace ES.Application

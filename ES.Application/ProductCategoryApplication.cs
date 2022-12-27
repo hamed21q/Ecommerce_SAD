@@ -1,8 +1,9 @@
-﻿        using ES.Application.Contracts.ProductCategory;
+﻿using ES.Application.Contracts.ProductCategory;
 using ES.Application.Contracts.ProductCategory.DTOs;
 using ES.Application.Contracts.ProductCategory.ViewModels;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.ProductCategory;
+using ES.Domain.Entities.Products.ProductCategory;
+using ES.Domain.Entities.Products.ProductCategory;
 using System.Globalization;
 
 namespace ES.Application

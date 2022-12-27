@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.ProductVariationOption
+namespace ES.Domain.Entities.Products.ProductVariationOption
 {
     public interface IProductVariationOptionService : IRepository<long, ProductVariationOption>
     {

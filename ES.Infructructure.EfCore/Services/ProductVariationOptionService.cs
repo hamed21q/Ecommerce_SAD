@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.ProductVariationOption;
+﻿using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Infructructure.EfCore.Base;
 
 namespace ES.Infructructure.EfCore.Services

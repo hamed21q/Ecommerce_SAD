@@ -1,6 +1,6 @@
 ﻿using ES.Application.Contracts.ProductConfiguration.DTOs;
 using ES.Application.Contracts.ProductConfiguration.ViewModel;
-using ES.Domain.Entities.ProductConfiguration;
+using ES.Domain.Entities.Products.ProductConfiguration;
 
 namespace ES.Application.Contracts.ProductConfiguration
 {

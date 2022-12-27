@@ -1,6 +1,6 @@
 ﻿using ES.Domain.DomainService;
 
-namespace ES.Domain.Entities.Product
+namespace ES.Domain.Entities.Products.Product
 {
     public interface IProductService : IRepository<long, Product>
     {

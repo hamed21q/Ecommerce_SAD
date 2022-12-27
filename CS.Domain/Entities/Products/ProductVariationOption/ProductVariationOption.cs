@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.ProductVariationOption
+namespace ES.Domain.Entities.Products.ProductVariationOption
 {
     public class ProductVariationOption : BaseDomain
     {
@@ -22,7 +22,7 @@ namespace ES.Domain.Entities.ProductVariationOption
         public void Edit(long variationId, string value)
         {
             Value = value;
-            VariationId= variationId;
+            VariationId = variationId;
         }
     }
 }
