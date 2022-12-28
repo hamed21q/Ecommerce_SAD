@@ -11,12 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Country\ViewModels\" />
-    <Folder Include="ProductItem\Validations\" />
+    <ProjectReference Include="..\CS.Domain\ES.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CS.Domain\ES.Domain.csproj" />
+    <Folder Include="Users\UserAddress\Validation\" />
+    <Folder Include="Users\UserRole\Validations\" />
   </ItemGroup>
 
 </Project>
