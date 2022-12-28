@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Country\ViewModels\" />
     <Folder Include="ProductItem\Validations\" />
   </ItemGroup>
 
