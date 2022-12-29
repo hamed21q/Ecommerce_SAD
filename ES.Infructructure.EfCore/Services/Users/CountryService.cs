@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Infructructure.EfCore.Services
+namespace ES.Infructructure.EfCore.Services.Users
 {
     public class CountryService : Repository<long, Country>, ICountryService
     {
