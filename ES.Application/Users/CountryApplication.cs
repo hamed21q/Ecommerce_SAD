@@ -1,8 +1,8 @@
-﻿using ES.Application.Contracts.Country;
-using ES.Application.Contracts.Country.DTOs;
+﻿using ES.Application.Contracts.Users.Country;
+using ES.Application.Contracts.Users.Country.DTOs;
 using ES.Domain.Entities.Country;
 
-namespace ES.Application
+namespace ES.Application.Users
 {
     public class CountryApplication : ICountryApplication
     {

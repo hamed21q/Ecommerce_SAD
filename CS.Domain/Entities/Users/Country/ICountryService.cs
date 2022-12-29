@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.Country
+namespace ES.Domain.Entities.Users.Country
 {
     public interface ICountryService : IRepository<long, Country>
     {
