@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Infructructure.EfCore.Mappings
+namespace ES.Infructructure.EfCore.Mappings.Users
 {
     public class CountryMapping : IEntityTypeConfiguration<Country>
     {

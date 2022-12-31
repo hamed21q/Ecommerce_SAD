@@ -1,4 +1,6 @@
-﻿namespace ES.Domain.Entities.Users.UserAddress
+﻿using ES.Domain.Entities.Users.Country;
+
+namespace ES.Domain.Entities.Users.UserAddress
 {
     public class UserAddress : BaseDomain
     {
@@ -11,6 +13,8 @@
         public string Street { get; private set; }
         public long UnitNumber { get; private set; }
 
+        //navigation 
+        public virtual Country.Country Coutnry { get; set; }
         public UserAddress(
             long countryId, 
             string region, 

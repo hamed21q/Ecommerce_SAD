@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Infructructure.EfCore.Services
+namespace ES.Infructructure.EfCore.Services.Products
 {
-    public class PromotionService : Repository<long, Promotion>, IPromotionService
+    public class ProductPromotionService : Repository<long, ProductPromotion>, IProductPromotionService
     {
-        public PromotionService(EcommerceContext context) : base(context)
+        public ProductPromotionService(EcommerceContext context) : base(context)
         {
         }
     }

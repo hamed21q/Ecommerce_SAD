@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Application.Contracts.Country.DTOs
+namespace ES.Application.Contracts.Users.Country.DTOs
 {
     public class CreateCountryCommand
     {
