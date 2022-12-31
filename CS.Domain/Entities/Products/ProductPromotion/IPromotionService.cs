@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.Promotion
+namespace ES.Domain.Entities.Products.ProductPromotion
 {
-    public interface IPromotionService : IRepository<long,Promotion>
+    public interface IPromotionService : IRepository<long, Promotion>
     {
     }
 }
