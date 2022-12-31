@@ -1,11 +1,10 @@
-﻿using ES.Domain.Entities.Products.Product;
-using ES.Domain.Entities.Products.ProductCategory;
-using ES.Domain.Entities.Products.ProductConfiguration;
-using ES.Domain.Entities.Products.ProductItem;
-using ES.Domain.Entities.Products.ProductVariation;
-using ES.Domain.Entities.Products.ProductVariationOption;
-using ES.Domain.Entities.Users.Role;
-using ES.Infructructure.EfCore.Mappings.Products;
+﻿using ES.Domain.Entities.Country;
+using ES.Domain.Entities.Product;
+using ES.Domain.Entities.ProductCategory;
+using ES.Domain.Entities.ProductItem;
+using ES.Domain.Entities.ProductVariation;
+using ES.Domain.Entities.ProductVariationOption;
+using ES.Infructructure.EfCore.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore
@@ -18,9 +17,7 @@ namespace ES.Infructructure.EfCore
         public DbSet<ProductVariation> ProductVariations { get; set; }
         public DbSet<ProductVariationOption> productVariationOptions { get; set; }
         public DbSet<ProductItem> productItems { get; set; }
-        public DbSet<ProductConfiguration> productConfigurations { get; set; }
-        //users
-        public DbSet<UserRole> userRoles { get; set; }
+        public DbSet<Country> countries { get; set; }
         public EcommerceContext(DbContextOptions<EcommerceContext> context) : base(context) 
         {
 

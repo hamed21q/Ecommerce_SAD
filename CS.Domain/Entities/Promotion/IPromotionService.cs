@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ES.Domain.Entities.Users.Country
+namespace ES.Domain.Entities.Promotion
 {
-    public interface ICountryService : IRepository<long, Country.>
+    public interface IPromotionService : IRepository<long,Promotion>
     {
     }
 }
