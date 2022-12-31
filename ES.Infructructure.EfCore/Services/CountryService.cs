@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.Country;
+﻿using ES.Domain.Entities.Users.Country;
 using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
 using System;

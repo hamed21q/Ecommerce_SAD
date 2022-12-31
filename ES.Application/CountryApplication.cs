@@ -1,6 +1,6 @@
 ﻿using ES.Application.Contracts.Country;
 using ES.Application.Contracts.Country.DTOs;
-using ES.Domain.Entities.Country;
+using ES.Domain.Entities.Users.Country;
 
 namespace ES.Application
 {

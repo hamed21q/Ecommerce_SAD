@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.Promotion;
+﻿using ES.Domain.Entities.Products.Promotion;
 using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
 using System;

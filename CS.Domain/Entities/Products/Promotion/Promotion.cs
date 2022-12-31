@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ES.Domain.Entities.Promotion
+namespace ES.Domain.Entities.Products.Promotion
 {
     public class Promotion : BaseDomain
     {
@@ -16,10 +16,10 @@ namespace ES.Domain.Entities.Promotion
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public Promotion(string name, 
+        public Promotion(string name,
             string description,
             double discountRate,
-            DateTime startDate, 
+            DateTime startDate,
             DateTime endDate) : base()
         {
             StartDate = startDate;

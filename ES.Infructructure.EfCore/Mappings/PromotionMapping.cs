@@ -1,5 +1,5 @@
 ﻿using ES.Domain.Entities.Country;
-using ES.Domain.Entities.Promotion;
+using ES.Domain.Entities.Products.Promotion;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
