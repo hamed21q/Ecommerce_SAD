@@ -15,9 +15,11 @@ namespace ES.Infructructure.EfCore.Mappings.Users
             builder.Property(x => x.AddressLine1).IsRequired();
             builder.Property(x => x.AddressLine2).IsRequired();
             builder.Property(x => x.PostalCode).IsRequired();
-            builder.Property(x => x.city).IsRequired();
+            builder.Property(x => x.City).IsRequired();
             builder.Property(x => x.Region).IsRequired();
-            builder.Property(x => x.CountryId).IsRequired();
+
+            builder.HasOne(x => x.Coutnry).WithMany(x => x.Addresses).HasForeignKey(x => x.CountryId).OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

@@ -10,8 +10,12 @@ namespace ES.Domain.Entities.Users.Country
     {
 
         public string Name { get; set; }
+
+        //navigation
+        public virtual List<UserAddress.UserAddress> Addresses { get; set; }
         public Country(string name)
         {
+            Addresses = new List<UserAddress.UserAddress>();
             Name = name;
         }
         public void Edit(string name)

@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Users\UserAddress\Validation\" />
     <Folder Include="Users\UserRole\Validations\" />
+    <Folder Include="Users\User\Validations\" />
   </ItemGroup>
 
 </Project>
