@@ -47,5 +47,10 @@ namespace ES.Presentation.Controllers.Users
         {
             userRoleApplication.Delete(id);
         }
+        [HttpGet]
+        public List<UserRoleViewModel> GetAll()
+        {
+            return userRoleApplication.GetAll();
+        }
     }
 }

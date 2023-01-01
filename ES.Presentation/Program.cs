@@ -33,6 +33,8 @@ using ES.Application.Contracts.Users.Role;
 using ES.Application.Users;
 using ES.Domain.Entities.Users.Role;
 using ES.Infructructure.EfCore.Services.Users;
+using ES.Application.Contracts.Users.Country;
+using ES.Domain.Entities.Users.Country;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -88,6 +90,11 @@ builder.Services.AddTransient<IProductConfigurationService, ProductConfiguration
 //user role
 builder.Services.AddTransient<IUserRoleApplication, UserRoleApplication>();
 builder.Services.AddTransient<IUserRoleService, UserRoleService>();
+
+//country
+builder.Services.AddTransient<ICountryApplication, CountryApplication>();
+builder.Services.AddTransient<ICountryService, CountryService>();
+
 
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
