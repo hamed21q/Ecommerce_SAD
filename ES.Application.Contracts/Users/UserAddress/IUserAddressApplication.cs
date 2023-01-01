@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ES.Application.Contracts.Users.UserAddress.DTOs;
+using ES.Application.Contracts.Users.UserAddress.ViewModel;
 
 namespace ES.Application.Contracts.Users.UserAddress
 {
-    public class IUserAddressApplication
+    public interface IUserAddressApplication
     {
+        UserAddressViewModel Convert(Domain.Entities.Users.UserAddress.UserAddress address);
+        void Add(CreateUserAddressComand command);
+        void Edit(EditUserAddressCommand command);
+        void Delete(long id);
+        UserAddressViewModel GetBy(long id);
     }
 }

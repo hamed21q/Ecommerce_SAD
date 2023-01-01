@@ -35,6 +35,10 @@ using ES.Domain.Entities.Users.Role;
 using ES.Infructructure.EfCore.Services.Users;
 using ES.Application.Contracts.Users.Country;
 using ES.Domain.Entities.Users.Country;
+using ES.Application.Contracts.Users.UserAddress;
+using ES.Domain.Entities.Users.UserAddress;
+using ES.Application.Contracts.Users.User;
+using ES.Domain.Entities.Users.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -95,6 +99,13 @@ builder.Services.AddTransient<IUserRoleService, UserRoleService>();
 builder.Services.AddTransient<ICountryApplication, CountryApplication>();
 builder.Services.AddTransient<ICountryService, CountryService>();
 
+//user Address
+builder.Services.AddTransient<IUserAddressApplication, UserAddressApplication>();
+builder.Services.AddTransient<IUserAddressService, UserAddressService>();
+
+//user
+builder.Services.AddTransient<IUserApplication, UserApplication>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
