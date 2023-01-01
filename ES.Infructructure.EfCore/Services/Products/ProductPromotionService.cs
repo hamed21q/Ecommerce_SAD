@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.Products.Promotion;
+﻿using ES.Domain.Entities.Products.ProductPromotion;
 using ES.Domain.Entities.Users.Country;
 using ES.Infructructure.EfCore.Base;
 using System;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Services.Products
 {
-    public class PromotionService : Repository<long, Promotion>, IPromotionService
+    public class ProductPromotionService : Repository<long, ProductPromotion>, IPromotionService
     {
-        public PromotionService(EcommerceContext context) : base(context)
+        public ProductPromotionService(EcommerceContext context) : base(context)
         {
 
         }

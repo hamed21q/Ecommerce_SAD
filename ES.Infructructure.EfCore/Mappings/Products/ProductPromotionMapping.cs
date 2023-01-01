@@ -1,5 +1,5 @@
 ﻿using ES.Domain.Entities.Products.Product;
-using ES.Domain.Entities.Products.Promotion;
+using ES.Domain.Entities.Products.ProductPromotion;
 using ES.Domain.Entities.Users.Country;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Mappings.Products
 {
-    public class PromotionMapping : IEntityTypeConfiguration<Promotion>
+    public class ProductPromotionMapping : IEntityTypeConfiguration<ProductPromotion>
     {
-        public void Configure(EntityTypeBuilder<Promotion> builder)
+        public void Configure(EntityTypeBuilder<ProductPromotion> builder)
         {
             builder.ToTable("Promotions");
             builder.HasKey(x => x.Id);
