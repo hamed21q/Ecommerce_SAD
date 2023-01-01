@@ -1,4 +1,4 @@
-﻿using ES.Domain.Entities.Products.Promotion;
+﻿using ES.Domain.Entities.Users.user;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

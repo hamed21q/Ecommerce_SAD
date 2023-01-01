@@ -1,4 +1,5 @@
 ﻿using ES.Application.Contracts.Users.Country.DTOs;
+using ES.Application.Contracts.Users.Country.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,9 @@ namespace ES.Application.Contracts.Users.Country
     public interface ICountryApplication
     {
         void Add(CreateCountryCommand command);
+        void Edit(EditCoutnryCommand command);
+        CoutryViewModels GetdBy(long id);
+        List<CoutryViewModels> GetAll();
+        void Delete(long id);
     }
 }
