@@ -15,5 +15,6 @@ namespace ES.Application.Contracts.Users.Role
         void Delete(long Id);
         bool Exist(long id);
         UserRoleViewModel GetBy(long id);
+        List<UserRoleViewModel> GetAll();
     }
 }

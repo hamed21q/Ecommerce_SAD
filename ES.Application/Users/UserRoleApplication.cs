@@ -48,6 +48,21 @@ namespace ES.Application.Users
             return userRoleService.Exist(r => r.Id == id);
         }
 
+        public List<UserRoleViewModel> GetAll()
+        {
+            var list = userRoleService.GetAll();
+            var views = new List<UserRoleViewModel>();  
+            foreach (var item in list)
+            {
+                views.Add(new UserRoleViewModel
+                {
+                    Name = item.Name,
+                    Id = item.Id
+                });
+            }
+            return views;
+        }
+
         public UserRoleViewModel GetBy(long id)
         {
             var role = userRoleService.GetBy(id);

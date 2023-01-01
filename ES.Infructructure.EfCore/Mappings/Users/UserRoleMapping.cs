@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ES.Infructructure.EfCore.Mappings.Users
 {
-    public class RoleMapping : IEntityTypeConfiguration<UserRole>
+    public class UserRoleMapping : IEntityTypeConfiguration<UserRole>
     {
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
