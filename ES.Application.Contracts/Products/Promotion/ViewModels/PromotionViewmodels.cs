@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ES.Application.Contracts.Products.Promotion.ViewModels
+﻿namespace ES.Application.Contracts.Products.Promotion.ViewModels
 {
     public class PromotionViewmodels
     {
