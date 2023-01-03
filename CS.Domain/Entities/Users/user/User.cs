@@ -1,4 +1,5 @@
-﻿using ES.Domain.Entities.Users.Role;
+﻿using ES.Domain.Entities.ShoppingCart.ShoppingCart;
+using ES.Domain.Entities.Users.Role;
 
 namespace ES.Domain.Entities.Users.User
 {
@@ -12,11 +13,13 @@ namespace ES.Domain.Entities.Users.User
         public bool IsDeleted { get; set; }
 
         //navigation
-        public UserAddress.UserAddress Address { get; set; }
+        public virtual UserAddress.UserAddress Address { get; set; }
+        public virtual List<ShoppingCart.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
         public UserRole Role { get; set; }
 
         public User (string emailAddress, int phoneNumber, string password) : base()
         {
+            this.ShoppingCarts = new List<ShoppingCart.ShoppingCart.ShoppingCart>();
             EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;
             Password = password;

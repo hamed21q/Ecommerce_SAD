@@ -1,5 +1,7 @@
 ﻿using ES.Application.Contracts.Products.Promotion.DTOs;
 using ES.Application.Contracts.Products.Promotion.ViewModels;
+using ES.Application.Contracts.ShoppingCard.ShoppingCard.DTOs;
+using ES.Application.Contracts.ShoppingCard.ShoppingCard.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,10 @@ namespace ES.Application.Contracts.ShoppingCard.ShoppingCard
 {
     public interface IShoppingCartApplication
     {
-        void Add(CreateShoppingCartCommand command);
+        void Add(CreatShoppingCartCommand command);
         void Edit(EditShoppingCartCommand command);
-        ShoppingCartViewmodels GetdBy(long id);
-        List<ShoppingCartViewmodels> GetAll();
+        ShoppingCartViewModel GetdBy(long id);
+        List<ShoppingCartViewModel> GetAll();
         void Delete(long id);
     }
 }

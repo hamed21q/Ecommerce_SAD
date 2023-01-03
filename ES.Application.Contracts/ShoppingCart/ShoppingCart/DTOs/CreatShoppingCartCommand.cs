@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ES.Application.Contracts.ShoppingCard.ShoppingCard.DTOs
 {
-    public class CreatShoppingCardCommand
+    public class CreatShoppingCartCommand
     {
         public long UserId { get; set; }
     }

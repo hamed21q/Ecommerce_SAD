@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Services.ShoppingCart
 {
-    public class ShoppingCartService : Repository<long, ShoppingCart>, IShoppingCart
+    public class ShoppingCartService : Repository<long, ShoppingCart>, IShoppingCartService
     {
         public ShoppingCart(EcommerceContext context) : base(context)
         {

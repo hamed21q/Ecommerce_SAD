@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ES.Domain.Entities.Users.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace ES.Domain.Entities.ShoppingCart.ShoppingCart
     public class ShoppingCart : BaseDomain
     {
         public long UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public ShoppingCart(long userId)
         { 

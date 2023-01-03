@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ES.Domain.Entities.ShoppingCart.ShoppingCart
 {
-    public interface IShoppingCart : IRepository<long, ShoppingCart>
+    public interface IShoppingCartService : IRepository<long, ShoppingCart>
     {
     }
 }
