@@ -1,6 +1,6 @@
 ﻿namespace ES.Application.Contracts.Products.Promotion.ViewModels
 {
-    public class PromotionViewmodels
+    public class ShoppingCartViewmodels
     {
         public long Id { get; set; }
         public string Name { get; set; }

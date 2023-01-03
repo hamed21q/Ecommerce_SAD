@@ -1,9 +1,14 @@
 ﻿using ES.Application.Contracts.Products.Promotion.DTOs;
 using ES.Application.Contracts.Products.Promotion.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ES.Application.Contracts.Products.Promotion
+namespace ES.Application.Contracts.ShoppingCard.ShoppingCard
 {
-    public interface IPromotionApplication
+    public interface IShoppingCartApplication
     {
         void Add(CreateShoppingCartCommand command);
         void Edit(EditShoppingCartCommand command);

@@ -1,6 +1,6 @@
 ﻿namespace ES.Application.Contracts.Products.Promotion.DTOs
 {
-    public class CreatePromotionCommand
+    public class CreateShoppingCartCommand
     {
         public string Name { get; set; }
         public string Description { get; set; }
