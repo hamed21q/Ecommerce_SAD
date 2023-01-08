@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Services.ShoppingCart
 {
-    public class ShoppingCartService : Repository<long, ShoppingCart>, IShoppingCartService
+    public class ShoppingCartService : Repository<long, Domain.Entities.ShoppingCart.ShoppingCart.ShoppingCart>, IShoppingCartService
     {
-        public ShoppingCart(EcommerceContext context) : base(context)
+        public ShoppingCartService(EcommerceContext context) : base(context)
         {
 
         }

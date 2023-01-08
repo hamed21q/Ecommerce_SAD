@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ES.Application.Contracts.Products.Product.ViewModels
+﻿namespace ES.Application.Contracts.Products.Product.ViewModels
 {
     public class ProductViewModel
     {
@@ -13,5 +7,7 @@ namespace ES.Application.Contracts.Products.Product.ViewModels
         public string Description { get; set; }
         public string Image { get; set; }
         public string Name { get; set; }
+        public double MinimumPrice { get; set; }
+        public int TotalQuantity { get; set; }
     }
 }

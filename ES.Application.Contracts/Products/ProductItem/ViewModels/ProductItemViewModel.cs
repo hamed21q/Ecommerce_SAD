@@ -9,7 +9,6 @@ namespace ES.Application.Contracts.Products.ProductItem.ViewModels
         public long ProductId { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public ProductViewModel Product { get; set; }
         public List<ProductConfigurationViewModel> Configurations { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using ES.Domain.Entities.Users.Country;
+﻿using ES.Domain.Entities.ShoppingCart.ShppingCartItem;
+using ES.Domain.Entities.Users.Country;
 using ES.Infructructure.EfCore.Mappings.Users;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ namespace ES.Infructructure.EfCore.Mappings.ShoppingCart
 {
     public class ShoppingCartItemMapping : EntityTypeConfiguration<ShoppingCartItemMapping>
     {
-        public void Configure(EntityTypeBuilder<ShoppingCartItemMapping> builder)
+        public void Configure(EntityTypeBuilder<ShoppingCartItem> builder)
         {
             builder.ToTable("ShoppingCartItems");
             builder.HasKey(x => x.Id);

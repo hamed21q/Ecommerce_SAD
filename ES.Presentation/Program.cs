@@ -10,7 +10,6 @@ using ES.Domain.Entities.Products.ProductVariation;
 using ES.Domain.Entities.Products.ProductCategory;
 using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Domain.Entities.Products.ProductItem;
-using ES.Infructructure.EfCore.Services.Products;
 using ES.Application.Contracts.Products.ProductVariationOption.DTOs;
 using ES.Application.Contracts.Products.ProductVariationOption.Validations;
 using ES.Application.Contracts.Products.ProductVariationOption;

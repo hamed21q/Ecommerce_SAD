@@ -1,6 +1,8 @@
 ﻿using ES.Application.Contracts.Products.Product;
 using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.ViewModels;
+using ES.Application.Contracts.Products.ProductItem;
+using ES.Application.Contracts.Products.ProductItem.ViewModels;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Products.Product;
 
@@ -11,10 +13,13 @@ namespace ES.Application.Products
         private readonly IProductService productService;
         private readonly IUnitOfWork unitOfWork;
 
-        public ProductApplication(IProductService productService, IUnitOfWork unitOfWork)
+        private readonly IProductItemApplication itemApplication;
+
+        public ProductApplication(IProductService productService, IUnitOfWork unitOfWork, IProductItemApplication itemApplication)
         {
             this.unitOfWork = unitOfWork;
             this.productService = productService;
+            this.itemApplication = itemApplication;
         }
 
         public void Add(CreateProductCommand command)
@@ -36,13 +41,18 @@ namespace ES.Application.Products
         public ProductViewModel GetBy(long id)
         {
             var product = productService.GetBy(id);
+            var totalQuantity = 0;
+            product.ProductItems.ForEach(i => totalQuantity += i.Quantity);
+            var minPrice = product.ProductItems.MinBy(p => p.Price).Price;
             return new ProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 CategoryId = product.CategoryId,
-                Image = product.Image
+                Image = product.Image,
+                MinimumPrice = minPrice,
+                TotalQuantity = totalQuantity
             };
         }
         public List<ProductViewModel> GetByCategory(long categoryId)
@@ -97,6 +107,14 @@ namespace ES.Application.Products
                 });
             }
             return viewModels;
+        }
+
+        public List<ProductItemViewModel> GetAllVariant(long id)
+        {
+            var product = productService.GetBy(id);
+            List<ProductItemViewModel> list = new List<ProductItemViewModel>();
+            product.ProductItems.ForEach(item => list.Add(itemApplication.Convert(item)));
+            return list;
         }
     }
 }

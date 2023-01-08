@@ -1,5 +1,6 @@
 ﻿using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.ViewModels;
+using ES.Application.Contracts.Products.ProductItem.ViewModels;
 
 namespace ES.Application.Contracts.Products.Product
 {
@@ -13,5 +14,6 @@ namespace ES.Application.Contracts.Products.Product
         void Delete(long id);
         ProductViewModel Convert(Domain.Entities.Products.Product.Product product);
         List<ProductViewModel> GetAll();
+        List<ProductItemViewModel> GetAllVariant(long id);
     }
 }

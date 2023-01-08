@@ -6,6 +6,7 @@ using ES.Application.Contracts.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductItem.DTOs;
 using ES.Application.Contracts.Products.ProductItem.ViewModels;
 using ES.Domain.DomainService;
+using ES.Domain.Entities.Products.Product;
 using ES.Domain.Entities.Products.ProductItem;
 
 namespace ES.Application.Products
@@ -14,20 +15,21 @@ namespace ES.Application.Products
     {
         private readonly IProductItemService productItemService;
         private readonly IUnitOfWork unitOfWork;
-        private readonly IProductApplication productApplication;
+        private readonly IProductService productService;
         private readonly IProductConfigurationApplication productConfigurationApplication;
 
         public ProductItemApplication(
             IProductItemService productItemService,
             IUnitOfWork unitOfWork,
-            IProductApplication productApplication,
+            IProductService productService,
             IProductConfigurationApplication productConfigurationApplication
         )
         {
             this.productConfigurationApplication = productConfigurationApplication;
             this.productItemService = productItemService;
             this.unitOfWork = unitOfWork;
-            this.productApplication = productApplication;
+            this.productItemService = productItemService;
+            this.productService = productService;
         }
 
         public void Add(CreateProductItemCommand command)
@@ -72,12 +74,7 @@ namespace ES.Application.Products
             var viewModels = new List<ProductItemViewModel>();
             foreach (var product in list)
             {
-                viewModels.Add(new ProductItemViewModel
-                {
-                    Id = product.Id,
-                    Quantity = product.Quantity,
-                    Price = product.Price
-                });
+                viewModels.Add(Convert(product));
             }
             return viewModels;
         }
@@ -85,7 +82,12 @@ namespace ES.Application.Products
         public ProductItemViewModel GetBy(long id)
         {
             var item = productItemService.GetBy(id);
-            var product = productApplication.Convert(item.Product);
+            return Convert(item);
+        }
+
+        public ProductItemViewModel Convert(ProductItem item)
+        {
+            var product = productService.GetBy(item.ProductId);
             var configurations = new List<ProductConfigurationViewModel>();
             item.Configurations.ForEach(confDomain =>
             {
@@ -95,9 +97,9 @@ namespace ES.Application.Products
 
             return new ProductItemViewModel
             {
-                Id = id,
+                Id = item.Id,
+                ProductId = item.ProductId,
                 Price = item.Price,
-                Product = product,
                 Quantity = item.Quantity,
                 Configurations = configurations
             };

@@ -1,10 +1,6 @@
 ﻿using ES.Application.Contracts.Products.ProductItem.DTOs;
 using ES.Application.Contracts.Products.ProductItem.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ES.Domain.Entities.Products.ProductItem;
 
 namespace ES.Application.Contracts.Products.ProductItem
 {
@@ -15,5 +11,6 @@ namespace ES.Application.Contracts.Products.ProductItem
         void Delete(long id);
         ProductItemViewModel GetBy(long id);
         List<ProductItemViewModel> GetAll();
+        ProductItemViewModel Convert(Domain.Entities.Products.ProductItem.ProductItem item);
     }
 }

@@ -15,7 +15,7 @@ namespace ES.Domain.Entities.Users.User
         //navigation
         public virtual UserAddress.UserAddress Address { get; set; }
         public virtual List<ShoppingCart.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
-        public UserRole Role { get; set; }
+        public virtual UserRole Role { get; set; }
 
         public User (string emailAddress, int phoneNumber, string password) : base()
         {
