@@ -12,7 +12,7 @@ namespace ES.Infructructure.EfCore.Mappings.ShoppingCart
             builder.HasKey(x => x.Id);
             builder.Property(x => x.UserId);
 
-            builder.HasOne(x => x.SiteUser).WithMany(x => x.ShoppingCart).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.User).WithMany(x => x.ShoppingCarts).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
 
         }
     }
