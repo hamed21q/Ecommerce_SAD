@@ -23,7 +23,6 @@ using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.Validations;
 using ES.Application.Contracts.Products.Product;
 using ES.Application.Contracts.Products.ProductItem.DTOs;
-using ES.Application.Contracts.Products.ProductItem.Validations;
 using ES.Application.Contracts.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductConfiguration;
 using ES.Application.Products;
@@ -57,7 +56,6 @@ builder.Services.AddTransient<IValidator<CreateProductVariationCommand>, CreateP
 builder.Services.AddTransient<IValidator<EditProductVariationCommand>, EditProductVariationValidation>();
 builder.Services.AddTransient<IValidator<EditProductVariationOptionCommand>, EditProductVariatioOptionValidation>();
 builder.Services.AddTransient<IValidator<CreateProductVariationOptionCommand>, CreateProductVariatioOptionValidation>();
-builder.Services.AddTransient<IValidator<CreateProductItemCommand>, CreateProductItemValidation>();
 
 
 

@@ -50,5 +50,20 @@ namespace ES.Application.Products
                 Value = option.VariationOption.Value
             };
         }
+        public List<ProductConfigurationViewModel> GetConfigurations(long productItemId)
+        {
+            var configs = productConfigurationService.GetConfigsByProductItem(productItemId);
+            var view = new List<ProductConfigurationViewModel>();
+            configs.ForEach(c => view.Add(Convert(c)));
+            return view;
+        }
+        private ProductConfigurationViewModel Convert(ProductConfiguration c)
+        {
+            return new ProductConfigurationViewModel
+            {
+                Name = c.VariationOption.Variation.Name,
+                Value = c.VariationOption.Value
+            };
+        }
     }
 }

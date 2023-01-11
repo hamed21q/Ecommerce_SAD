@@ -1,10 +1,12 @@
 ﻿using ES.Domain.DomainService;
+using ES.Domain.Entities.Products.ProductItem;
 
 namespace ES.Domain.Entities.Products.Product
 {
     public interface IProductService : IRepository<long, Product>
     {
-        List<Product> GetProductsBy(long categoryId);
-        ProductCategory.ProductCategory GetProductsCategory(long categoryId);
+        double GetMinimumPrice(long id);
+        List<Product> GetProductsByCategory(long categoryId);
+        int GetTotalQuantity(long id);
     }
 }

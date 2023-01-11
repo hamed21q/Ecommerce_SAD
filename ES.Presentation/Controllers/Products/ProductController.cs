@@ -67,17 +67,5 @@ namespace ES.Presentation.Controllers.Products
         {
             return productApplication.GetBy(id);
         }
-        
-        [HttpGet]
-        public List<ProductViewModel> GetAll()
-        {
-            return productApplication.GetAll();
-        }
-
-        [HttpGet("variants")]
-        public List<ProductItemViewModel> GetAllVariants(long id)
-        {
-            return productApplication.GetAllVariant(id);
-        }
     }
 }

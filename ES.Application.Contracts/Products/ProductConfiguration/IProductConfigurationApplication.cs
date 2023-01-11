@@ -9,5 +9,6 @@ namespace ES.Application.Contracts.Products.ProductConfiguration
         void Add(List<CreateProductConfigurationCommand> variations);
         void Edit(long id, long productItemId, long variationOptionId);
         ProductConfigurationViewModel GetBy(long id);
+        List<ProductConfigurationViewModel> GetConfigurations(long productItemId);
     }
 }

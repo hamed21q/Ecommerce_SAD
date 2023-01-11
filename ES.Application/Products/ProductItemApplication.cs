@@ -15,21 +15,18 @@ namespace ES.Application.Products
     {
         private readonly IProductItemService productItemService;
         private readonly IUnitOfWork unitOfWork;
-        private readonly IProductService productService;
-        private readonly IProductConfigurationApplication productConfigurationApplication;
+        private readonly IProductConfigurationApplication configurationApplication;
 
         public ProductItemApplication(
             IProductItemService productItemService,
             IUnitOfWork unitOfWork,
-            IProductService productService,
             IProductConfigurationApplication productConfigurationApplication
         )
         {
-            this.productConfigurationApplication = productConfigurationApplication;
+            this.configurationApplication = productConfigurationApplication;
             this.productItemService = productItemService;
             this.unitOfWork = unitOfWork;
             this.productItemService = productItemService;
-            this.productService = productService;
         }
 
         public void Add(CreateProductItemCommand command)
@@ -50,7 +47,7 @@ namespace ES.Application.Products
                     VariationOptionId = vId
                 });
             }
-            productConfigurationApplication.Add(configurationCommands);
+            configurationApplication.Add(configurationCommands);
         }
 
         public void Delete(long id)
@@ -68,40 +65,28 @@ namespace ES.Application.Products
 
         }
 
-        public List<ProductItemViewModel> GetAll()
-        {
-            var list = productItemService.GetAll();
-            var viewModels = new List<ProductItemViewModel>();
-            foreach (var product in list)
-            {
-                viewModels.Add(Convert(product));
-            }
-            return viewModels;
-        }
-
         public ProductItemViewModel GetBy(long id)
         {
             var item = productItemService.GetBy(id);
             return Convert(item);
         }
-
-        public ProductItemViewModel Convert(ProductItem item)
+        public List<ProductItemViewModel> GetAllSibllings(long productId)
         {
-            var product = productService.GetBy(item.ProductId);
-            var configurations = new List<ProductConfigurationViewModel>();
-            item.Configurations.ForEach(confDomain =>
-            {
-                var configurationViewModel = productConfigurationApplication.GetBy(confDomain.Id);
-                configurations.Add(configurationViewModel);
-            });
+            var items = productItemService.GetAllSibllings(productId);
+            var view = new List<ProductItemViewModel>();
+            items.ForEach(i => view.Add(Convert(i)));
+            return view;
 
+        }
+        private ProductItemViewModel Convert(ProductItem item)
+        {
             return new ProductItemViewModel
             {
                 Id = item.Id,
                 ProductId = item.ProductId,
-                Price = item.Price,
                 Quantity = item.Quantity,
-                Configurations = configurations
+                Price = item.Price,
+                Configurations = configurationApplication.GetConfigurations(item.Id)
             };
         }
     }

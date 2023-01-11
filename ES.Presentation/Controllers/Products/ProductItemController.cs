@@ -11,48 +11,43 @@ namespace ES.Presentation.Controllers.Products
     [ApiController]
     public class ProductItemController : ControllerBase
     {
-        private readonly IProductItemApplication productItemApplication;
+        private readonly IProductItemApplication ItemApplication;
 
         public ProductItemController(IProductItemApplication productItemApplication)
         {
-            this.productItemApplication = productItemApplication;
+            this.ItemApplication = productItemApplication;
         }
-
-
-        // GET api/<ProductItemController>/5
         [HttpGet("{id}")]
         public ProductItemViewModel Get(long id)
         {
-            return productItemApplication.GetBy(id);
+            return ItemApplication.GetBy(id);
         }
 
-        // POST api/<ProductItemController>
         [HttpPost]
         public IActionResult Post([FromBody] CreateProductItemCommand command)
         {
-            productItemApplication.Add(command);
+            ItemApplication.Add(command);
             return Ok();
         }
 
-        // PUT api/<ProductItemController>/5
         [HttpPut]
         public IActionResult Put([FromBody] EditProductItemCommand command)
         {
-            productItemApplication.Edit(command);
+            ItemApplication.Edit(command);
             return Ok();
         }
 
-        // DELETE api/<ProductItemController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            productItemApplication.Delete(id);
+            ItemApplication.Delete(id);
             return Ok();
         }
-        [HttpGet]
-        public List<ProductItemViewModel> GetAll()
+
+        [HttpGet("siblings")]
+        public List<ProductItemViewModel> GetSibllings(long productId)
         {
-            return productItemApplication.GetAll();
+            return ItemApplication.GetAllSibllings(productId);
         }
     }
 }
