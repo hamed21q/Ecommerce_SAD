@@ -8,7 +8,7 @@ namespace ES.Application.Contracts.Products.ProductCategory
         void Add(CreateProductCategoryCommand command);
         List<ProductCategoryViewModel> GetAll();
         bool IsValid(long id);
-        ProductCategoryViewModel GetBy(long id);
+        DetailedProductCategoryViewModel GetBy(long id);
         void Edit(EditProductCategoryCommand command);
         void Remove(long id);
         void Activate(long id);

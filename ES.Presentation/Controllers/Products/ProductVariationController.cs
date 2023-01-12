@@ -47,5 +47,10 @@ namespace ES.Presentation.Controllers.Products
             productVariationApplication.Remove(id);
             return Ok();
         }
+        [HttpGet("ByCategory")]
+        public List<DetailedProductVariationViewModel> GetByCategory(long categoryId)
+        {
+            return productVariationApplication.GetByCategory(categoryId);
+        }
     }
 }

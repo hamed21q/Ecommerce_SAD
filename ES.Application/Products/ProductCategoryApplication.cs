@@ -1,8 +1,10 @@
-﻿using ES.Application.Contracts.Products.ProductCategory;
+﻿using ES.Application.Contracts.Products.Product.ViewModels;
+using ES.Application.Contracts.Products.ProductCategory;
 using ES.Application.Contracts.Products.ProductCategory.DTOs;
 using ES.Application.Contracts.Products.ProductCategory.ViewModels;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Products.ProductCategory;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Globalization;
 
 namespace ES.Application.Products
@@ -60,20 +62,34 @@ namespace ES.Application.Products
             return viewModel;
         }
 
-        public ProductCategoryViewModel GetBy(long id)
+        public DetailedProductCategoryViewModel GetBy(long id)
         {
             var productCategory = productCategoryService.GetBy(id);
-            return new ProductCategoryViewModel
+            var childView = new List<ProductCategoryViewModel>();
+            productCategoryService.GetSubCategories(id).ForEach(c => childView.Add(convert(c)));
+            return new DetailedProductCategoryViewModel
             {
                 Id = productCategory.Id,
                 CreationDate = productCategory.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Title = productCategory.Title,
                 IsDeleted = productCategory.IsDeleted,
                 Parent = productCategory.Parent?.Id,
-                Grade = productCategory.Grade
+                Grade = productCategory.Grade,
+                childCategories = childView
             };
         }
-
+        private ProductCategoryViewModel convert(ProductCategory p)
+        {
+            return new ProductCategoryViewModel
+            {
+                Id = p.Id,
+                CreationDate = p.CreationDate.ToString(CultureInfo.InvariantCulture),
+                Grade = p.Parent.Grade + 1,
+                IsDeleted = p.IsDeleted,
+                Parent = p.ParentId,
+                Title = p.Title
+            };
+        }
         public bool IsValid(long id)
         {
             return productCategoryService.Exist(x => x.Id == id);

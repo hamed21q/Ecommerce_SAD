@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Infructructure.EfCore", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Infrustructure.Core", "ES.Infrustructure.Core\ES.Infrustructure.Core.csproj", "{5FAC5EC9-5970-4243-B926-0FA84F9D8B82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES.Presentation", "ES.Presentation\ES.Presentation.csproj", "{70D58938-1A98-48DF-8CD2-A0047BEA2449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES.Presentation", "ES.Presentation\ES.Presentation.csproj", "{70D58938-1A98-48DF-8CD2-A0047BEA2449}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

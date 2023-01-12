@@ -22,7 +22,6 @@ using ES.Application.Contracts.Products.ProductCategory;
 using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.Validations;
 using ES.Application.Contracts.Products.Product;
-using ES.Application.Contracts.Products.ProductItem.DTOs;
 using ES.Application.Contracts.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductConfiguration;
 using ES.Application.Products;
@@ -110,6 +109,7 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<EcommerceContext>(option => option
     .UseLazyLoadingProxies()
     .UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
+
 
 
 var app = builder.Build();

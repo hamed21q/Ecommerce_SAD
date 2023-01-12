@@ -15,7 +15,8 @@ namespace ES.Application.Contracts.Products.ProductVariation
         void Edit(EditProductVariationCommand command);
         ProductVariationViewModel GetBy(long id);
         List<ProductVariationViewModel> GetAll();
-        List<ProductVariationViewModel> GetByCategory(long categoryId);
+        List<DetailedProductVariationViewModel> GetByCategory(long categoryId);
+
         void Remove(long id);
         bool IsValid(long id);
     }

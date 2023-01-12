@@ -1,6 +1,8 @@
 ﻿using ES.Application.Contracts.Products.Product;
 using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.ViewModels;
+using ES.Application.Contracts.Products.ProductItem;
+using ES.Application.Contracts.Products.ProductItem.ViewModels;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Products.Product;
 
@@ -9,14 +11,17 @@ namespace ES.Application.Products
     public class ProductApplication : IProductApplication
     {
         private readonly IProductService productService;
+        private readonly IProductItemApplication itemApplication;
         private readonly IUnitOfWork unitOfWork;
         public ProductApplication(
             IProductService productService,
-            IUnitOfWork unitOfWork
+            IUnitOfWork unitOfWork,
+            IProductItemApplication itemApplication
             )
         {
             this.unitOfWork = unitOfWork;
             this.productService = productService;
+            this.itemApplication = itemApplication;
         }
 
         public void Add(CreateProductCommand command)
@@ -50,19 +55,28 @@ namespace ES.Application.Products
             unitOfWork.Save(); 
         }
 
-        public ProductViewModel GetBy(long id)
+        public DetailedProductViewModel GetBy(long id)
         {
             var product = productService.GetBy(id);
-            return Convert(product);
+            return new DetailedProductViewModel
+            {
+                Id = product.Id,
+                CategoryId = product.CategoryId,
+                Description = product.Description,
+                Image = product.Image,
+                Name = product.Name,
+                MinimumPrice = productService.GetMinimumPrice(product.Id),
+                TotalQuantity = productService.GetTotalQuantity(product.Id),
+                items = itemApplication.GetAllSibllings(product.Id)
+            };
         }
 
         public List<ProductViewModel> GetByCategory(long categoryId)
         {
-            var products = productService.GetProductsByCategory(categoryId);
+            var products = productService.GetByCategory(categoryId);
             var view = new List<ProductViewModel>();
             foreach (var item in products)
             {
-                //if (item.ProductItems.Count == 0) continue;
                 view.Add(Convert(item));
             }
             return view;
@@ -83,8 +97,13 @@ namespace ES.Application.Products
                 Image = p.Image,
                 Name = p.Name,
                 MinimumPrice = productService.GetMinimumPrice(p.Id),
-                TotalQuantity = productService.GetTotalQuantity(p.Id)
+                TotalQuantity = productService.GetTotalQuantity(p.Id),
             };
+        }
+
+        public List<ProductItemViewModel> GetProductItems(long id)
+        {
+            return itemApplication.GetAllSibllings(id);
         }
     }
 }

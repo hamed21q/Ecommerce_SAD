@@ -1,6 +1,4 @@
 ﻿using ES.Domain.Entities.Products.Product;
-using ES.Domain.Entities.Products.ProductCategory;
-using ES.Domain.Entities.Products.ProductItem;
 using ES.Infructructure.EfCore.Base;
 
 namespace ES.Infructructure.EfCore.Services.Products.Products
@@ -30,16 +28,15 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             return sum;
         }
         private List<Product> products;
-        public List<Product> GetProductsByCategory(long categoryId)
+        public List<Product> GetByCategory(long categoryId)
         {
             var category = context.productCategories.Find(categoryId);
             products.AddRange(category.Products);
             foreach (var item in category.ChildeCategories)
             {
-                GetProductsByCategory(item.Id);
+                GetByCategory(item.Id);
             }
             return products;
         }
-        
     }
 }

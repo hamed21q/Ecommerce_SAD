@@ -1,10 +1,8 @@
 ﻿using ES.Application.Contracts.Products.Product;
 using ES.Application.Contracts.Products.Product.DTOs;
 using ES.Application.Contracts.Products.Product.ViewModels;
-using ES.Application.Contracts.Products.ProductItem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ES.Presentation.Controllers.Products
 {
@@ -63,9 +61,17 @@ namespace ES.Presentation.Controllers.Products
         }
        
         [HttpGet("id")]
-        public ProductViewModel GetBy(long id)
+        public DetailedProductViewModel GetBy(long id)
         {
-            return productApplication.GetBy(id);
+            try
+            {
+                return productApplication.GetBy(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

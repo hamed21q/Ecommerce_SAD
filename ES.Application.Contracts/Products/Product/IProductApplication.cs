@@ -9,8 +9,9 @@ namespace ES.Application.Contracts.Products.Product
         void Add(CreateProductCommand command);
         bool IsValid(long id);
         void Edit(EditProductCommand command);
-        ProductViewModel GetBy(long id);
+        DetailedProductViewModel GetBy(long id);
         List<ProductViewModel> GetByCategory(long id);
         void Delete(long id);
+        List<ProductItemViewModel> GetProductItems(long id);
     }
 }

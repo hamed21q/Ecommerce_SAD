@@ -59,18 +59,22 @@ namespace ES.Application.Products
             };
         }
 
-        public List<ProductVariationViewModel> GetByCategory(long categoryId)
+        public List<DetailedProductVariationViewModel> GetByCategory(long categoryId)
         {
-            var list = productVariationService.GetByCategory(categoryId);
-            var view = new List<ProductVariationViewModel>();
-            foreach (var item in list)
+            var variations = productVariationService.GetByCategory(categoryId);
+            var view = new List<DetailedProductVariationViewModel>();
+            foreach (var item in variations)
             {
-                view.Add(new ProductVariationViewModel
+                var values = new List<string>();
+                item.ProductVariationOptions.ForEach(v => values.Add(v.Value));
+                DetailedProductVariationViewModel v = new DetailedProductVariationViewModel
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    CategoryId = item.CategoryId
-                });
+                    CategoryId = item.CategoryId,
+                    values = values
+                };
+                view.Add(v);
             }
             return view;
         }

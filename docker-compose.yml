@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  es.presentation:
+    image: ${DOCKER_REGISTRY-}espresentation
+    build:
+      context: .
+      dockerfile: ES.Presentation/Dockerfile
