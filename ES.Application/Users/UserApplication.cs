@@ -1,9 +1,14 @@
 ﻿using ES.Application.Contracts.Users.User;
 using ES.Application.Contracts.Users.User.DTOs;
+using ES.Application.Contracts.Users.User.DTOs.Login;
+using ES.Application.Contracts.Users.User.DTOs.Register;
 using ES.Application.Contracts.Users.User.ViewModels;
 using ES.Application.Contracts.Users.UserAddress;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Users.User;
+using ES.Domain.Entities.Users.UserAddress;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 
 namespace ES.Application.Users
 {
@@ -19,9 +24,10 @@ namespace ES.Application.Users
             this.addressApplication = addressApplication;
         }
 
-        public void Add(CreateUserCommand command)
+        public void Add(RegisterDTO command)
         {
-            var user = new User(command.EmailAddress, command.PhoneNumber, command.Password);
+            long addressId = addressApplication.Add(command.address);
+            User user = new User(command.EmailAddress, command.PhoneNumber, command.Password, addressId);
             userService.Add(user);
             unitOfWork.Save();
         }
@@ -35,9 +41,13 @@ namespace ES.Application.Users
 
         public void Edit(EditUserCommand command)
         {
-            var user = userService.GetBy(command.Id);
-            user.Edit(command.EmailAddress, command.PhoneNumber, command.Password, command.AddressId);
-            unitOfWork.Save();
+            
+        }
+
+        public UserViewModel FindByEmail(string email)
+        {
+            var user = userService.FindByEmail(email);
+            return GetBy(user.Id);
         }
 
         public UserViewModel GetBy(long id)
@@ -51,6 +61,13 @@ namespace ES.Application.Users
                 AddressViewModel = addressApplication.Convert(user.Address),
                 RoleId = user.RoleId
             };
+        }
+
+        public bool Login(LoginDTO command)
+        {
+            var user = userService.FindByEmail(command.EmailAddress);
+            if (user == null) return false;
+            return user.Password.SequenceEqual(command.Password);
         }
     }
 }

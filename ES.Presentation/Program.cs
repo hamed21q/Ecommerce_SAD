@@ -36,6 +36,9 @@ using ES.Application.Contracts.Users.UserAddress;
 using ES.Domain.Entities.Users.UserAddress;
 using ES.Application.Contracts.Users.User;
 using ES.Domain.Entities.Users.User;
+using ES.Application.Contracts.Users.User.Validations;
+using ES.Application.Contracts.Users.User.DTOs.Login;
+using ES.Application.Contracts.Users.User.DTOs.Register;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +58,10 @@ builder.Services.AddTransient<IValidator<CreateProductVariationCommand>, CreateP
 builder.Services.AddTransient<IValidator<EditProductVariationCommand>, EditProductVariationValidation>();
 builder.Services.AddTransient<IValidator<EditProductVariationOptionCommand>, EditProductVariatioOptionValidation>();
 builder.Services.AddTransient<IValidator<CreateProductVariationOptionCommand>, CreateProductVariatioOptionValidation>();
+builder.Services.AddTransient<IValidator<LoginUserCommand>, LoginValidation>();
+builder.Services.AddTransient<IValidator<CreateUserCommand>, RegisterVallidation>();
+
+
 
 
 
@@ -106,9 +113,15 @@ builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPass = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPass};TrustServerCertificate=true;";
+
 builder.Services.AddDbContext<EcommerceContext>(option => option
     .UseLazyLoadingProxies()
-    .UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
+    .UseSqlServer(connectionString));
 
 
 

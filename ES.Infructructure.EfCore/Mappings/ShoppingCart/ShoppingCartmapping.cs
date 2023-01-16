@@ -1,10 +1,11 @@
 ﻿using ES.Infructructure.EfCore.Mappings.Users;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using ES.Domain.Entities.ShoppingCart.ShoppingCart;
 
 namespace ES.Infructructure.EfCore.Mappings.ShoppingCart
 {
-    public class ShoppingCartMapping : EntityTypeConfiguration<Domain.Entities.ShoppingCart.ShoppingCart.ShoppingCart>
+    public class ShoppingCartMapping : IEntityTypeConfiguration<Domain.Entities.ShoppingCart.ShoppingCart.ShoppingCart>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.ShoppingCart.ShoppingCart.ShoppingCart> builder)
         {

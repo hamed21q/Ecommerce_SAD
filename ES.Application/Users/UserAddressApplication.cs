@@ -17,7 +17,7 @@ namespace ES.Application.Users
             this.unitOfWork = unitOfWork;
         }
 
-        public void Add(CreateUserAddressComand command)
+        public long Add(CreateUserAddressComand command)
         {
             var address = new UserAddress(
                 command.CountryId, 
@@ -31,6 +31,8 @@ namespace ES.Application.Users
             );
             addressService.Add(address);
             unitOfWork.Save();
+            var id = address.Id;
+            return id;
         }
 
         public UserAddressViewModel Convert(UserAddress address)

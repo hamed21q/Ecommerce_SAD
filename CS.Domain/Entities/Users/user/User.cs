@@ -6,8 +6,8 @@ namespace ES.Domain.Entities.Users.User
     public class User : BaseDomain
     {
         public string EmailAddress { get; private set; }
-        public int PhoneNumber { get; private  set; }
-        public string Password { get; private set; }
+        public string PhoneNumber { get; private  set; }
+        public byte[] Password { get; private set; }
         public long RoleId { get; private set; }
         public long AddressId { get; private set; }
         public bool IsDeleted { get; set; }
@@ -17,15 +17,21 @@ namespace ES.Domain.Entities.Users.User
         public virtual List<ShoppingCart.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
         public virtual UserRole Role { get; set; }
 
-        public User (string emailAddress, int phoneNumber, string password) : base()
+        public User (
+            string emailAddress,
+            string phoneNumber, 
+            byte[] password,
+            long addressId) : base()
         {
             this.ShoppingCarts = new List<ShoppingCart.ShoppingCart.ShoppingCart>();
             EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;
             Password = password;
             IsDeleted = false;
+            AddressId = addressId;
+            RoleId = 3;
         }
-        public void Edit(string emailAddress, int phoneNumber, string password, long addressId)
+        public void Edit(string emailAddress, string phoneNumber, byte[] password, long addressId)
         {
             EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;

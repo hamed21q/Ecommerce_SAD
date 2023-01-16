@@ -1,8 +1,41 @@
 version: '3.4'
+networks:
+  backend:
 
 services:
+  es.db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: es.db
+    ports:
+      - "8001:1433" 
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=H@med1369
+    networks:
+      - backend
+    volumes:
+      - "./data:/var/opt/mssql/data" 
+  es.balancer:
+    container_name: es.balancer
+    image: nginx:latest
+    volumes:
+      - "./conf.d:/etc/nginx/conf.d"
+    ports:
+      -  "8004:80"
+    depends_on:
+      - es.presentation
   es.presentation:
+    container_name: es.api
     image: ${DOCKER_REGISTRY-}espresentation
+    ports:
+      - "8002:80" 
     build:
       context: .
       dockerfile: ES.Presentation/Dockerfile
+    networks:
+      - backend
+    environment:
+      - DB_HOST=es.db
+      - DB_NAME=ecommerce   
+      - DB_SA_PASSWORD=H@med1369
+  

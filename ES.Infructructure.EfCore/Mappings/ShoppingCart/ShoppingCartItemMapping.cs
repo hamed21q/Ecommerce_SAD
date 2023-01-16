@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ES.Infructructure.EfCore.Mappings.ShoppingCart
 {
-    public class ShoppingCartItemMapping : EntityTypeConfiguration<ShoppingCartItemMapping>
+    public class ShoppingCartItemMapping : IEntityTypeConfiguration<ShoppingCartItem>
     {
         public void Configure(EntityTypeBuilder<ShoppingCartItem> builder)
         {
