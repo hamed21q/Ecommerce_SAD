@@ -15,20 +15,11 @@ services:
       - backend
     volumes:
       - "./data:/var/opt/mssql/data" 
-  es.balancer:
-    container_name: es.balancer
-    image: nginx:latest
-    volumes:
-      - "./conf.d:/etc/nginx/conf.d"
-    ports:
-      -  "8004:80"
-    depends_on:
-      - es.presentation
   es.presentation:
     container_name: es.api
-    image: ${DOCKER_REGISTRY-}espresentation
+    image: ${DOCKER_REGISTRY-}espresentation 
     ports:
-      - "8002:80" 
+      - 8002:80 
     build:
       context: .
       dockerfile: ES.Presentation/Dockerfile
@@ -38,4 +29,14 @@ services:
       - DB_HOST=es.db
       - DB_NAME=ecommerce   
       - DB_SA_PASSWORD=H@med1369
-  
+    depends_on:
+      - es.db
+  es.balancer:
+    container_name: es.balancer
+    image: nginx:latest
+    volumes:
+      - "./conf.d:/etc/nginx/conf.d"
+    ports:
+      -  "8004:80"
+    depends_on:
+      - es.presentation

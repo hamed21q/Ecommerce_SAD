@@ -2,16 +2,14 @@
 using ES.Application.Contracts.Users.User.DTOs;
 using ES.Application.Contracts.Users.User.DTOs.Login;
 using ES.Application.Contracts.Users.User.DTOs.Register;
-using ES.Application.Contracts.Users.User.Validations;
 using ES.Application.Contracts.Users.User.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text.Unicode;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ES.Presentation.Controllers.Users
 {
@@ -39,41 +37,12 @@ namespace ES.Presentation.Controllers.Users
         [HttpPost]
         public void Post([FromBody] CreateUserCommand command)
         {
-            var dto = new RegisterDTO
-            {
-                EmailAddress = command.EmailAddress,
-                PhoneNumber = command.PhoneNumber,
-                Password = CreateHash(command.Password),
-                address = command.address
-            };
-            userApplication.Add(dto);
-        }
-        [HttpGet("test")]
-        public bool test()
-        {
-            var s1 = "hamed";
-            byte[] b1 = CreateHash(s1);
-            //var s2 = "hamed";
-            byte[] b2 = CreateHash(s1);
-
-            return b1.SequenceEqual(b2);
-        }
-        private byte[] CreateHash(string password)
-        {
-            using(var hmac = new HMACSHA256())
-            {
-                return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
+            userApplication.Add(command);
         }
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginUserCommand command)
         {
-            var dto = new LoginDTO
-            {
-                EmailAddress = command.EmailAddress,
-                Password = CreateHash(command.Password)
-            };
-            var result = userApplication.Login(dto);
+            var result = userApplication.Login(command);
             if (result)
             {
                 var user = userApplication.FindByEmail(command.EmailAddress);
@@ -91,7 +60,8 @@ namespace ES.Presentation.Controllers.Users
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, user.EmailAddress)
+                new Claim(ClaimTypes.Email, user.EmailAddress),
+                new Claim(ClaimTypes.Role, user.Role)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -103,18 +73,22 @@ namespace ES.Presentation.Controllers.Users
             return jwt;
         }
 
-        // PUT api/<UserController>/5
         [HttpPut]
         public void Put([FromBody] EditUserCommand command)
         {
             userApplication.Edit(command);
         }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(long id)
+        [HttpPost("setAdmin")]
+        [Authorize(Roles = "owner")]
+        public void QualifyToAdmin(long id)
         {
-            userApplication.Delete(id);
+            userApplication.EditRole(id, "admin");
+        }
+        [HttpPost("setOwner")]
+        [Authorize(Roles = "owner")]
+        public void QualifyToOwner(long id)
+        {
+            userApplication.EditRole(id, "owner");
         }
     }
 }

@@ -24,12 +24,22 @@ namespace ES.Application.Users
             this.addressApplication = addressApplication;
         }
 
-        public void Add(RegisterDTO command)
+        public void Add(CreateUserCommand command)
         {
             long addressId = addressApplication.Add(command.address);
-            User user = new User(command.EmailAddress, command.PhoneNumber, command.Password, addressId);
+            CreateHash(command.Password, out byte[] salt, out byte[] pass);
+
+            User user = new User(command.EmailAddress, command.PhoneNumber, pass, salt, addressId);
             userService.Add(user);
             unitOfWork.Save();
+        }
+        private void CreateHash(string password, out byte[] salt, out byte[] hashed)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                salt = hmac.Key;
+                hashed = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
 
         public void Delete(long id)
@@ -63,11 +73,25 @@ namespace ES.Application.Users
             };
         }
 
-        public bool Login(LoginDTO command)
+        public bool Login(LoginUserCommand command)
         {
             var user = userService.FindByEmail(command.EmailAddress);
             if (user == null) return false;
-            return user.Password.SequenceEqual(command.Password);
+            return VerifyPasswordHash(command.Password, user.Password, user.PasswordSalt);
+        }
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+
+        public void EditRole(long id, string roleName)
+        {
+            userService.SetAdmin(id, roleName);
+            unitOfWork.Save();
         }
     }
 }

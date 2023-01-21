@@ -14,11 +14,12 @@ namespace ES.Application.Contracts.Users.User
 {
     public interface IUserApplication
     {
-        void Add(RegisterDTO command);
+        void Add(CreateUserCommand command);
         void Edit(EditUserCommand command);
         UserViewModel GetBy(long id);
         void Delete(long id);
-        bool Login(LoginDTO command);
+        bool Login(LoginUserCommand command);
         UserViewModel FindByEmail(string email);
+        void EditRole(long id, string roleId);
     }
 }

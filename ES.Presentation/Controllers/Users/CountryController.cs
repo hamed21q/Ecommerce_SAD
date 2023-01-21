@@ -1,6 +1,7 @@
 ﻿using ES.Application.Contracts.Users.Country;
 using ES.Application.Contracts.Users.Country.DTOs;
 using ES.Application.Contracts.Users.Country.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -45,6 +46,7 @@ namespace ES.Presentation.Controllers.Users
             countryApplication.Delete(id);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public List<CoutryViewModels> GetAll()
         {
             return countryApplication.GetAll();

@@ -15,6 +15,17 @@ namespace ES.Infructructure.EfCore.Services.Users
         public User FindByEmail(string email)
         {
             return context.users.Where(u => u.EmailAddress.Equals(email)).First();
-        } 
+        }
+
+        public void SetAdmin(long id, string name)
+        {
+            var user = GetBy(id);
+            var roleId = context.userRoles.Where(r => r.Name == name).First();
+            if (roleId == null)
+            {
+                throw new ArgumentException();
+            }
+            user.EditRole(roleId.Id);
+        }
     }
 }

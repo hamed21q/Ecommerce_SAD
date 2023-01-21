@@ -8,6 +8,7 @@ namespace ES.Domain.Entities.Users.User
         public string EmailAddress { get; private set; }
         public string PhoneNumber { get; private  set; }
         public byte[] Password { get; private set; }
+        public byte[] PasswordSalt { get; set; }
         public long RoleId { get; private set; }
         public long AddressId { get; private set; }
         public bool IsDeleted { get; set; }
@@ -21,6 +22,7 @@ namespace ES.Domain.Entities.Users.User
             string emailAddress,
             string phoneNumber, 
             byte[] password,
+            byte[] salt,
             long addressId) : base()
         {
             this.ShoppingCarts = new List<ShoppingCart.ShoppingCart.ShoppingCart>();
@@ -30,6 +32,11 @@ namespace ES.Domain.Entities.Users.User
             IsDeleted = false;
             AddressId = addressId;
             RoleId = 3;
+            PasswordSalt = salt;
+        }
+        protected User()
+        {
+
         }
         public void Edit(string emailAddress, string phoneNumber, byte[] password, long addressId)
         {
