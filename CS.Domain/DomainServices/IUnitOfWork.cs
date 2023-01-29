@@ -8,6 +8,6 @@ namespace ES.Domain.DomainService
 {
     public interface IUnitOfWork
     {
-        void Save();
+        Task Save();
     }
 }

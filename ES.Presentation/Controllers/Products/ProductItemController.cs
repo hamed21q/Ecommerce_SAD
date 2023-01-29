@@ -18,36 +18,36 @@ namespace ES.Presentation.Controllers.Products
             this.ItemApplication = productItemApplication;
         }
         [HttpGet("{id}")]
-        public ProductItemViewModel Get(long id)
+        public async Task<ProductItemViewModel> Get(long id)
         {
-            return ItemApplication.GetBy(id);
+            return await ItemApplication.GetBy(id);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProductItemCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateProductItemCommand command)
         {
-            ItemApplication.Add(command);
+            await ItemApplication.Add(command);
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] EditProductItemCommand command)
+        public async Task<IActionResult> Put([FromBody] EditProductItemCommand command)
         {
-            ItemApplication.Edit(command);
+            await ItemApplication.Edit(command);
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            ItemApplication.Delete(id);
+            await ItemApplication.Delete(id);
             return Ok();
         }
 
         [HttpGet("siblings")]
-        public List<ProductItemViewModel> GetSibllings(long productId)
+        public async Task<List<ProductItemViewModel>> GetSibllings(long productId)
         {
-            return ItemApplication.GetAllSibllings(productId);
+            return await ItemApplication.GetAllSibllings(productId);
         }
     }
 }

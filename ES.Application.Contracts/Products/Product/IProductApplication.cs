@@ -6,12 +6,12 @@ namespace ES.Application.Contracts.Products.Product
 {
     public interface IProductApplication
     {
-        void Add(CreateProductCommand command);
-        bool IsValid(long id);
-        void Edit(EditProductCommand command);
-        DetailedProductViewModel GetBy(long id);
-        List<ProductViewModel> GetByCategory(long id);
-        void Delete(long id);
-        List<ProductItemViewModel> GetProductItems(long id);
+        Task Add(CreateProductCommand command);
+        Task<bool> IsValid(long id);
+        Task Edit(EditProductCommand command);
+        Task<DetailedProductViewModel> GetBy(long id);
+        Task<List<ProductViewModel>> GetByCategory(long id);
+        Task Delete(long id);
+        Task<List<ProductItemViewModel>> GetProductItems(long id);
     }
 }

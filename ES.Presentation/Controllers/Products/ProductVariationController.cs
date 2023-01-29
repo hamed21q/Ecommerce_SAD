@@ -19,38 +19,38 @@ namespace ES.Presentation.Controllers.Products
 
         // GET api/<ProductVariationController>/5
         [HttpGet("{id}")]
-        public ProductVariationViewModel Get(long id)
+        public async Task<ProductVariationViewModel> Get(long id)
         {
-            return productVariationApplication.GetBy(id);
+            return await productVariationApplication.GetBy(id);
         }
 
         // POST api/<ProductVariationController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProductVariationCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateProductVariationCommand command)
         {
-            productVariationApplication.Add(command);
+            await productVariationApplication.Add(command);
             return Ok();
         }
 
         // PUT api/<ProductVariationController>/5
         [HttpPut]
-        public IActionResult Put([FromBody] EditProductVariationCommand command)
+        public async Task<IActionResult> Put([FromBody] EditProductVariationCommand command)
         {
-            productVariationApplication.Edit(command);
+            await productVariationApplication.Edit(command);
             return Ok();
         }
 
         // DELETE api/<ProductVariationController>/5
         [HttpDelete]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            productVariationApplication.Remove(id);
+            await productVariationApplication.Remove(id);
             return Ok();
         }
         [HttpGet("ByCategory")]
-        public List<DetailedProductVariationViewModel> GetByCategory(long categoryId)
+        public async Task<List<DetailedProductVariationViewModel>> GetByCategory(long categoryId)
         {
-            return productVariationApplication.GetByCategory(categoryId);
+            return await productVariationApplication.GetByCategory(categoryId);
         }
     }
 }

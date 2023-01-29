@@ -14,19 +14,19 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             this.context = context;
         }
 
-        public List<Product> GetAllProductsBy(long categoryId)
+        public async Task<List<Product>> GetAllProductsBy(long categoryId)
         {
-            var category = GetBy(categoryId);
+            var category = await GetBy(categoryId);
             return category.Products;
         }
         private List<ProductCategory> categories;
-        public List<ProductCategory> GetSubCategories(long id)
+        public async Task<List<ProductCategory>> GetSubCategories(long id)
         {
-            var category = GetBy(id);
+            var category = await GetBy(id);
             categories.AddRange(category.ChildeCategories);
             foreach (var item in category.ChildeCategories)
             {
-                GetSubCategories(item.Id);
+                await GetSubCategories(item.Id);
             }
             return categories;
         }

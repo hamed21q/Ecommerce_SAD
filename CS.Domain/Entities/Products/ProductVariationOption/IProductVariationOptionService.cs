@@ -9,6 +9,6 @@ namespace ES.Domain.Entities.Products.ProductVariationOption
 {
     public interface IProductVariationOptionService : IRepository<long, ProductVariationOption>
     {
-        List<ProductVariationOption> GetbyVariation(long variationId);
+        Task<List<ProductVariationOption>> GetbyVariation(long variationId);
     }
 }

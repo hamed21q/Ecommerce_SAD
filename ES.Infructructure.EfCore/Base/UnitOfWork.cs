@@ -12,9 +12,9 @@ namespace ES.Infructructure.EfCore.Base
             this.dbContext = dbContext;
         }
 
-        public void Save()
+        public async Task Save()
         {
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
     }
 }

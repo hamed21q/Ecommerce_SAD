@@ -5,11 +5,11 @@ namespace ES.Application.Contracts.Products.ProductItem
 {
     public interface IProductItemApplication
     {
-        void Add(CreateProductItemCommand command);
-        void Edit(EditProductItemCommand command);
-        void Delete(long id);
-        ProductItemViewModel GetBy(long id);
-        List<ProductItemViewModel> GetAllSibllings(long productId);
+        Task Add(CreateProductItemCommand command);
+        Task Edit(EditProductItemCommand command);
+        Task Delete(long id);
+        Task<ProductItemViewModel> GetBy(long id);
+        Task<List<ProductItemViewModel>> GetAllSibllings(long productId);
 
     }
 }

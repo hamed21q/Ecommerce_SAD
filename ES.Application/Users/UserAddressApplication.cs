@@ -17,7 +17,7 @@ namespace ES.Application.Users
             this.unitOfWork = unitOfWork;
         }
 
-        public long Add(CreateUserAddressComand command)
+        public async Task<long> Add(CreateUserAddressComand command)
         {
             var address = new UserAddress(
                 command.CountryId, 
@@ -29,10 +29,9 @@ namespace ES.Application.Users
                 command.Street, 
                 command.UnitNumber
             );
-            addressService.Add(address);
-            unitOfWork.Save();
-            var id = address.Id;
-            return id;
+            await addressService.Add(address);
+            await unitOfWork.Save();
+            return address.Id;
         }
 
         public UserAddressViewModel Convert(UserAddress address)
@@ -50,16 +49,16 @@ namespace ES.Application.Users
             };
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var address = addressService.GetBy(id);
+            var address = await addressService.GetBy(id);
             addressService.Delete(address);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditUserAddressCommand command)
+        public async Task Edit(EditUserAddressCommand command)
         {
-            var address = addressService.GetBy(command.Id);
+            var address = await addressService.GetBy(command.Id);
             address.Edit(
                 command.CountryId,
                 command.Region,
@@ -70,12 +69,12 @@ namespace ES.Application.Users
                 command.Street,
                 command.UnitNumber
             );
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public UserAddressViewModel GetBy(long id)
+        public async Task<UserAddressViewModel> GetBy(long id)
         {
-            var address = addressService.GetBy(id);
+            var address = await addressService.GetBy(id);
             return Convert(address);
         }
     }

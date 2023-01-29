@@ -18,42 +18,42 @@ namespace ES.Presentation.Controllers.Products
         }
 
         [HttpGet]
-        public IEnumerable<ProductCategoryViewModel> Get()
+        public async Task<IEnumerable<ProductCategoryViewModel>> Get()
         {
-            var list = productCategoryApplication.GetAll();
+            var list = await productCategoryApplication.GetAll();
             return list;
         }
 
         [HttpGet("{id}")]
-        public ProductCategoryViewModel Get(long id)
+        public async Task<ProductCategoryViewModel> Get(long id)
         {
-            return productCategoryApplication.GetBy(id);
+            return await productCategoryApplication.GetBy(id);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProductCategoryCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateProductCategoryCommand command)
         {
-            productCategoryApplication.Add(command);
+            await productCategoryApplication.Add(command);
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] EditProductCategoryCommand command)
+        public async Task<IActionResult> Put([FromBody] EditProductCategoryCommand command)
         {
-            productCategoryApplication.Edit(command);
+            await productCategoryApplication.Edit(command);
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            productCategoryApplication.Remove(id);
+            await productCategoryApplication.Remove(id);
             return Ok();
         }
         [HttpPost("Activate")]
-        public IActionResult Activate(long id)
+        public async Task<IActionResult> Activate(long id)
         {
-            productCategoryApplication.Activate(id);
+            await productCategoryApplication.Activate(id);
             return Ok();
         }
     }

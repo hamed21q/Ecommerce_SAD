@@ -17,30 +17,30 @@ namespace ES.Application.Products
             this.unitOfWork = unitOfWork;
         }
 
-        public void Add(CreateProductVariationOptionCommand command)
+        public async Task Add(CreateProductVariationOptionCommand command)
         {
             var option = new ProductVariationOption(command.VariationId, command.Value);
-            productVariationOptionService.Add(option);
-            unitOfWork.Save();
+            await productVariationOptionService.Add(option);
+            await unitOfWork.Save();
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var option = productVariationOptionService.GetBy(id);
+            var option = await productVariationOptionService.GetBy(id);
             productVariationOptionService.Delete(option);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditProductVariationOptionCommand command)
+        public async Task Edit(EditProductVariationOptionCommand command)
         {
-            var option = productVariationOptionService.GetBy(command.Id);
+            var option = await productVariationOptionService.GetBy(command.Id);
             option.Edit(command.VariationId, command.Value);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public ProductVariationOptionViewModel GetBy(long id)
+        public async Task<ProductVariationOptionViewModel> GetBy(long id)
         {
-            var option = productVariationOptionService.GetBy(id);
+            var option = await productVariationOptionService.GetBy(id);
             return new ProductVariationOptionViewModel
             {
                 VariationId = option.VariationId,
@@ -48,9 +48,9 @@ namespace ES.Application.Products
             };
         }
 
-        public List<ProductVariationOptionViewModel> GetByVariation(long variationId)
+        public async Task<List<ProductVariationOptionViewModel>> GetByVariation(long variationId)
         {
-            var list = productVariationOptionService.GetbyVariation(variationId);
+            var list = await productVariationOptionService.GetbyVariation(variationId);
             var view = new List<ProductVariationOptionViewModel>();
             foreach (var item in list)
             {
@@ -63,9 +63,9 @@ namespace ES.Application.Products
             return view;
         }
 
-        public bool IsValid(long id)
+        public async Task<bool> IsValid(long id)
         {
-            return productVariationOptionService.Exist(pvo => pvo.Id == id);
+            return await productVariationOptionService.Exist(pvo => pvo.Id == id);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace ES.Domain.Entities.Products.ProductConfiguration
 {
     public interface IProductConfigurationService : IRepository<long, ProductConfiguration>
     {
-        List<ProductConfiguration> GetConfigsByProductItem(long productItemId);
+        Task<List<ProductConfiguration>> GetConfigsByProductItem(long productItemId);
     }
 }

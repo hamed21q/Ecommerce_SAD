@@ -1,5 +1,6 @@
 ﻿using ES.Domain.Entities.Users.User;
 using ES.Infructructure.EfCore.Base;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace ES.Infructructure.EfCore.Services.Users
@@ -12,14 +13,14 @@ namespace ES.Infructructure.EfCore.Services.Users
             this.context = context;
         }
 
-        public User FindByEmail(string email)
+        public Task<User> FindByEmail(string email)
         {
-            return context.users.Where(u => u.EmailAddress.Equals(email)).First();
+            return context.users.Where(u => u.EmailAddress.Equals(email)).FirstAsync();
         }
 
-        public void SetAdmin(long id, string name)
+        public async Task SetAdmin(long id, string name)
         {
-            var user = GetBy(id);
+            var user = await GetBy(id);
             var roleId = context.userRoles.Where(r => r.Name == name).First();
             if (roleId == null)
             {

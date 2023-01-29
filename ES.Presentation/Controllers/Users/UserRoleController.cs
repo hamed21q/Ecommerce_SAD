@@ -20,37 +20,38 @@ namespace ES.Presentation.Controllers.Users
 
         // GET api/<UserRoleController>/5
         [HttpGet("{id}")]
-        public UserRoleViewModel Get(long id)
+        public async Task<UserRoleViewModel> Get(long id)
         {
-            return userRoleApplication.GetBy(id);
+            return await userRoleApplication.GetBy(id);
         }
 
         // POST api/<UserRoleController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateUserRoleCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateUserRoleCommand command)
         {
-            userRoleApplication.Add(command);
+            await userRoleApplication.Add(command);
             return Ok();
         }
 
         // PUT api/<UserRoleController>/5
         [HttpPut]
-        public IActionResult Put([FromBody] EditUserRoleCommand command)
+        public async Task<IActionResult> Put([FromBody] EditUserRoleCommand command)
         {
-            userRoleApplication.Edit(command);
+            await userRoleApplication.Edit(command);
             return Ok();
         }
 
         // DELETE api/<UserRoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            userRoleApplication.Delete(id);
+            await userRoleApplication.Delete(id);
+            return Ok();
         }
         [HttpGet]
-        public List<UserRoleViewModel> GetAll()
+        public async Task<List<UserRoleViewModel>> GetAll()
         {
-            return userRoleApplication.GetAll();
+            return await userRoleApplication.GetAll();
         }
     }
 }

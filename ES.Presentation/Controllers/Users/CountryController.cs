@@ -20,36 +20,40 @@ namespace ES.Presentation.Controllers.Users
 
         // GET api/<CountryController>/5
         [HttpGet("{id}")]
-        public CoutryViewModels Get(long id)
+        public async Task<CoutryViewModels> Get(long id)
         {
-            return countryApplication.GetdBy(id);
+            return await countryApplication.GetdBy(id);
         }
 
         // POST api/<CountryController>
         [HttpPost]
-        public void Post([FromBody] CreateCountryCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateCountryCommand command)
         {
-            countryApplication.Add(command);
+            await countryApplication.Add(command);
+            return Ok();
         }
 
         // PUT api/<CountryController>/5
         [HttpPut]
-        public void Put([FromBody] EditCoutnryCommand command)
+        public async Task<IActionResult> Put([FromBody] EditCoutnryCommand command)
         {
-            countryApplication.Edit(command);
+            await countryApplication.Edit(command);
+            return Ok();
+
         }
 
         // DELETE api/<CountryController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            countryApplication.Delete(id);
+            await countryApplication.Delete(id);
+            return Ok();
         }
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public List<CoutryViewModels> GetAll()
+        public async Task<List<CoutryViewModels>> GetAll()
         {
-            return countryApplication.GetAll();
+            return await countryApplication.GetAll();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ES.Application.Products
             this.itemApplication = itemApplication;
         }
 
-        public void Add(CreateProductCommand command)
+        public async Task Add(CreateProductCommand command)
         {
             var product = new Product(
                 command.Name,
@@ -32,32 +32,32 @@ namespace ES.Application.Products
                 command.CategoryId, 
                 command.Image
             );
-            productService.Add(product);
-            unitOfWork.Save();
+            await productService.Add(product);
+            await unitOfWork.Save();
 
         }
-        public void Edit(EditProductCommand command)
+        public async Task Edit(EditProductCommand command)
         {
-            var product = productService.GetBy(command.Id);
+            var product = await productService.GetBy(command.Id);
             product.Edit(
                 command.Name,
                 command.Description,
                 command.CategoryId,
                 command.Image
             );
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var product = productService.GetBy(id);
+            var product = await productService.GetBy(id);
             productService.Delete(product);
-            unitOfWork.Save(); 
+            await unitOfWork.Save(); 
         }
 
-        public DetailedProductViewModel GetBy(long id)
+        public async Task<DetailedProductViewModel> GetBy(long id)
         {
-            var product = productService.GetBy(id);
+            var product = await productService.GetBy(id);
             return new DetailedProductViewModel
             {
                 Id = product.Id,
@@ -65,29 +65,29 @@ namespace ES.Application.Products
                 Description = product.Description,
                 Image = product.Image,
                 Name = product.Name,
-                MinimumPrice = productService.GetMinimumPrice(product.Id),
-                TotalQuantity = productService.GetTotalQuantity(product.Id),
-                items = itemApplication.GetAllSibllings(product.Id)
+                MinimumPrice = await productService.GetMinimumPrice(product.Id),
+                TotalQuantity = await productService.GetTotalQuantity(product.Id),
+                items = await itemApplication.GetAllSibllings(product.Id)
             };
         }
 
-        public List<ProductViewModel> GetByCategory(long categoryId)
+        public async Task<List<ProductViewModel>> GetByCategory(long categoryId)
         {
-            var products = productService.GetByCategory(categoryId);
+            var products = await productService.GetByCategory(categoryId);
             var view = new List<ProductViewModel>();
             foreach (var item in products)
             {
-                view.Add(Convert(item));
+                view.Add(await Convert(item));
             }
             return view;
         }
 
-        public bool IsValid(long id)
+        public async Task<bool> IsValid(long id)
         {
-            return productService.Exist(p => p.Id == id);
+            return await productService.Exist(p => p.Id == id);
         }
 
-        private ProductViewModel Convert(Product p)
+        private async Task<ProductViewModel> Convert(Product p)
         {
             return new ProductViewModel
             {
@@ -96,14 +96,16 @@ namespace ES.Application.Products
                 Description = p.Description,
                 Image = p.Image,
                 Name = p.Name,
-                MinimumPrice = productService.GetMinimumPrice(p.Id),
-                TotalQuantity = productService.GetTotalQuantity(p.Id),
+                MinimumPrice = await productService.GetMinimumPrice(p.Id),
+                TotalQuantity = await productService.GetTotalQuantity(p.Id),
             };
         }
 
-        public List<ProductItemViewModel> GetProductItems(long id)
+        public async Task<List<ProductItemViewModel>> GetProductItems(long id)
         {
-            return itemApplication.GetAllSibllings(id);
+            return await itemApplication.GetAllSibllings(id);
         }
+
+       
     }
 }

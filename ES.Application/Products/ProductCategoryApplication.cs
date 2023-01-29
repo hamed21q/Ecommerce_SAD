@@ -23,29 +23,30 @@ namespace ES.Application.Products
             this.unitOfWork = unitOfWork;
         }
 
-        public void Add(CreateProductCategoryCommand command)
+        public async Task Add(CreateProductCategoryCommand command)
         {
-            var parentGrade = productCategoryService.GetBy(command.Parent).Grade;
-            var productCategory = new ProductCategory(command.Title, command.Parent, ++parentGrade);
-            productCategoryService.Add(productCategory);
-            unitOfWork.Save();
+            var parent = await productCategoryService.GetBy(command.Parent);
+            var grade = parent.Grade + 1;
+            var productCategory = new ProductCategory(command.Title, command.Parent, grade);
+            await productCategoryService.Add(productCategory);
+            await unitOfWork.Save();
         }
 
-        public void Remove(long id)
+        public async Task Remove(long id)
         {
-            var productCategory = productCategoryService.GetBy(id);
+            var productCategory = await productCategoryService.GetBy(id);
             productCategory.Remove();
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
-        public void Activate(long id)
+        public async Task Activate(long id)
         {
-            var productCategory = productCategoryService.GetBy(id);
+            var productCategory = await productCategoryService.GetBy(id);
             productCategory.Activate();
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
-        public List<ProductCategoryViewModel> GetAll()
+        public async Task<List<ProductCategoryViewModel>> GetAll()
         {
-            var list = productCategoryService.GetAll();
+            var list = await productCategoryService.GetAll();
             var viewModel = new List<ProductCategoryViewModel>();
             foreach (var item in list)
             {
@@ -62,11 +63,12 @@ namespace ES.Application.Products
             return viewModel;
         }
 
-        public DetailedProductCategoryViewModel GetBy(long id)
+        public async Task<DetailedProductCategoryViewModel> GetBy(long id)
         {
-            var productCategory = productCategoryService.GetBy(id);
+            var productCategory = await productCategoryService.GetBy(id);
             var childView = new List<ProductCategoryViewModel>();
-            productCategoryService.GetSubCategories(id).ForEach(c => childView.Add(convert(c)));
+            var subCategories = await productCategoryService.GetSubCategories(id);
+            subCategories.ForEach(c => childView.Add(convert(c)));
             return new DetailedProductCategoryViewModel
             {
                 Id = productCategory.Id,
@@ -90,17 +92,18 @@ namespace ES.Application.Products
                 Title = p.Title
             };
         }
-        public bool IsValid(long id)
+        public async Task<bool> IsValid(long id)
         {
-            return productCategoryService.Exist(x => x.Id == id);
+            return await productCategoryService.Exist(x => x.Id == id);
         }
 
-        public void Edit(EditProductCategoryCommand command)
+        public async Task Edit(EditProductCategoryCommand command)
         {
-            var productCategory = productCategoryService.GetBy(command.Id);
-            var parentGrade = productCategoryService.GetBy(command.Parent).Grade;
-            productCategory.Edit(command.Parent, command.Title, ++parentGrade);
-            unitOfWork.Save();
+            var productCategory = await productCategoryService.GetBy(command.Id);
+            var parent = await productCategoryService.GetBy(command.Parent);
+            var grade = parent.Grade + 1;
+            productCategory.Edit(command.Parent, command.Title, grade);
+            await unitOfWork.Save();
         }
     }
 }

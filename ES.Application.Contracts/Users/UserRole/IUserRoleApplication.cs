@@ -10,11 +10,11 @@ namespace ES.Application.Contracts.Users.Role
 {
     public interface IUserRoleApplication
     {
-        void Add(CreateUserRoleCommand command);
-        void Edit(EditUserRoleCommand command);
-        void Delete(long Id);
-        bool Exist(long id);
-        UserRoleViewModel GetBy(long id);
-        List<UserRoleViewModel> GetAll();
+        Task Add(CreateUserRoleCommand command);
+        Task Edit(EditUserRoleCommand command);
+        Task Delete(long Id);
+        Task<bool> Exist(long id);
+        Task<UserRoleViewModel> GetBy(long id);
+        Task<List<UserRoleViewModel>> GetAll();
     }
 }

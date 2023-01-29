@@ -5,10 +5,10 @@ namespace ES.Application.Contracts.Products.Promotion
 {
     public interface IPromotionApplication
     {
-        void Add(CreateShoppingCartCommand command);
-        void Edit(EditShoppingCartCommand command);
-        ShoppingCartViewmodels GetdBy(long id);
-        List<ShoppingCartViewmodels> GetAll();
-        void Delete(long id);
+        Task Add(CreateShoppingCartCommand command);
+        Task Edit(EditShoppingCartCommand command);
+        Task<ShoppingCartViewmodels> GetdBy(long id);
+        Task<List<ShoppingCartViewmodels>> GetAll();
+        Task Delete(long id);
     }
 }

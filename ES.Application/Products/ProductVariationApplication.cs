@@ -18,23 +18,23 @@ namespace ES.Application.Products
             this.productVariationService = productVariationService;
         }
 
-        public void Add(CreateProductVariationCommand command)
+        public async Task Add(CreateProductVariationCommand command)
         {
             var variation = new ProductVariation(command.CategoryId, command.Name);
-            productVariationService.Add(variation);
-            unitOfWork.Save();
+            await productVariationService.Add(variation);
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditProductVariationCommand command)
+        public async Task Edit(EditProductVariationCommand command)
         {
-            var variation = productVariationService.GetBy(command.Id);
+            var variation = await productVariationService.GetBy(command.Id);
             variation.Edit(command.CategoryId, command.Name);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public List<ProductVariationViewModel> GetAll()
+        public async Task<List<ProductVariationViewModel>> GetAll()
         {
-            var list = productVariationService.GetAll();
+            var list = await productVariationService.GetAll();
             var view = new List<ProductVariationViewModel>();
             foreach (var item in list)
             {
@@ -48,9 +48,9 @@ namespace ES.Application.Products
             return view;
         }
 
-        public ProductVariationViewModel GetBy(long id)
+        public async Task<ProductVariationViewModel> GetBy(long id)
         {
-            var variation = productVariationService.GetBy(id);
+            var variation = await productVariationService.GetBy(id);
             return new ProductVariationViewModel
             {
                 Id = id,
@@ -59,9 +59,9 @@ namespace ES.Application.Products
             };
         }
 
-        public List<DetailedProductVariationViewModel> GetByCategory(long categoryId)
+        public async Task<List<DetailedProductVariationViewModel>> GetByCategory(long categoryId)
         {
-            var variations = productVariationService.GetByCategory(categoryId);
+            var variations = await productVariationService.GetByCategory(categoryId);
             var view = new List<DetailedProductVariationViewModel>();
             foreach (var item in variations)
             {
@@ -79,16 +79,16 @@ namespace ES.Application.Products
             return view;
         }
 
-        public bool IsValid(long id)
+        public async Task<bool> IsValid(long id)
         {
-            return productVariationService.Exist(x => x.Id == id);
+            return await productVariationService.Exist(x => x.Id == id);
         }
 
-        public void Remove(long id)
+        public async Task Remove(long id)
         {
-            var variation = productVariationService.GetBy(id);
+            var variation = await productVariationService.GetBy(id);
             productVariationService.Delete(variation);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
     }
 }

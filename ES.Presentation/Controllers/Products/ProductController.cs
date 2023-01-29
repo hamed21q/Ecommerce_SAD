@@ -18,25 +18,25 @@ namespace ES.Presentation.Controllers.Products
         }
 
         [HttpPost("Create")]
-        public IActionResult Post([FromBody] CreateProductCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {
-            productApplication.Add(command);
+            await productApplication.Add(command);
             return Ok();
         }
 
         [HttpPut("Edit")]
-        public IActionResult Put([FromBody] EditProductCommand command)
+        public async Task<IActionResult> Put([FromBody] EditProductCommand command)
         {
-            productApplication.Edit(command);
+            await productApplication.Edit(command);
             return Ok();
         }
         
         [HttpGet("ProductsByCategory")]
-        public List<ProductViewModel> GetByCategoryId(long id)
+        public async Task<List<ProductViewModel>> GetByCategoryId(long id)
         {
             try
             {
-                return productApplication.GetByCategory(id);
+                return await productApplication.GetByCategory(id);
             }
             catch (Exception)
             {
@@ -46,11 +46,11 @@ namespace ES.Presentation.Controllers.Products
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
             try
             {
-                productApplication.Delete(id);
+                await productApplication.Delete(id);
                 return Ok();
             }
             catch (Exception)
@@ -61,11 +61,11 @@ namespace ES.Presentation.Controllers.Products
         }
        
         [HttpGet("id")]
-        public DetailedProductViewModel GetBy(long id)
+        public async Task<DetailedProductViewModel>  GetBy(long id)
         {
             try
             {
-                return productApplication.GetBy(id);
+                return await productApplication.GetBy(id);
             }
             catch (Exception)
             {

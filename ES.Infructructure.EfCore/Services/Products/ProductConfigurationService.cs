@@ -1,5 +1,6 @@
 ﻿using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Infructructure.EfCore.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore.Services.Products.Products
 {
@@ -11,9 +12,9 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             this.context = context;
         }
 
-        public List<ProductConfiguration> GetConfigsByProductItem(long productItemId)
+        public async Task<List<ProductConfiguration>> GetConfigsByProductItem(long productItemId)
         {
-            return context.productConfigurations.Where(c => c.ProductItemId == productItemId).ToList();
+            return await context.productConfigurations.Where(c => c.ProductItemId == productItemId).ToListAsync();
         }
     }
 }

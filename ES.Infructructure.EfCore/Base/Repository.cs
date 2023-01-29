@@ -14,9 +14,9 @@ namespace ES.Infructructure.EfCore.Base
             _context = context;
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            _context.Add(entity);
+            await _context.AddAsync(entity);
         }
 
         public void Delete(T entity)
@@ -24,20 +24,19 @@ namespace ES.Infructructure.EfCore.Base
             _context.Remove(entity);
         }
 
-        public bool Exist(Expression<Func<T, bool>> expr)
+        public async Task<bool> Exist(Expression<Func<T, bool>> expr)
         {
-            bool result = _context.Set<T>().Any(expr);
-            return result;
+            return await _context.Set<T>().AnyAsync(expr);
         }
 
-        public ICollection<T> GetAll()
+        public async Task<ICollection<T>> GetAll()
         {
-            return _context.Set<T>().ToList();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public T GetBy(TKey id)
+        public async Task<T> GetBy(TKey id)
         {
-            return _context.Find<T>(id);
+            return await _context.FindAsync<T>(id);
         }
         
     }

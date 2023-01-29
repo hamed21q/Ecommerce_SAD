@@ -24,35 +24,35 @@ namespace ES.Application.Products
             this.unitOfWork = unitOfWork;
         }
 
-        public void Add(List<CreateProductConfigurationCommand> variations)
+        public async Task Add(List<CreateProductConfigurationCommand> variations)
         {
             foreach (var item in variations)
             {
-                productConfigurationService.Add(new ProductConfiguration(item.ProductItemId, item.VariationOptionId));
+                await productConfigurationService.Add(new ProductConfiguration(item.ProductItemId, item.VariationOptionId));
             }
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(long id, long productItemId, long variationOptionId)
+        public async Task Edit(long id, long productItemId, long variationOptionId)
         {
-            var conf = productConfigurationService.GetBy(id);
+            var conf = await productConfigurationService.GetBy(id);
             conf.Edit(productItemId, variationOptionId);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public ProductConfigurationViewModel GetBy(long id)
+        public async Task<ProductConfigurationViewModel> GetBy(long id)
         {
-            var option = productConfigurationService.GetBy(id);
-            var variation = productVariationApplication.GetBy(option.VariationOption.VariationId);
+            var option = await productConfigurationService.GetBy(id);
+            var variation = await productVariationApplication.GetBy(option.VariationOption.VariationId);
             return new ProductConfigurationViewModel
             {
                 Name = variation.Name,
                 Value = option.VariationOption.Value
             };
         }
-        public List<ProductConfigurationViewModel> GetConfigurations(long productItemId)
+        public async Task<List<ProductConfigurationViewModel>> GetConfigurations(long productItemId)
         {
-            var configs = productConfigurationService.GetConfigsByProductItem(productItemId);
+            var configs = await productConfigurationService.GetConfigsByProductItem(productItemId);
             var view = new List<ProductConfigurationViewModel>();
             configs.ForEach(c => view.Add(Convert(c)));
             return view;

@@ -6,9 +6,9 @@ namespace ES.Application.Contracts.Products.ProductConfiguration
 {
     public interface IProductConfigurationApplication
     {
-        void Add(List<CreateProductConfigurationCommand> variations);
-        void Edit(long id, long productItemId, long variationOptionId);
-        ProductConfigurationViewModel GetBy(long id);
-        List<ProductConfigurationViewModel> GetConfigurations(long productItemId);
+        Task Add(List<CreateProductConfigurationCommand> variations);
+        Task Edit(long id, long productItemId, long variationOptionId);
+        Task<ProductConfigurationViewModel> GetBy(long id);
+        Task<List<ProductConfigurationViewModel>> GetConfigurations(long productItemId);
     }
 }

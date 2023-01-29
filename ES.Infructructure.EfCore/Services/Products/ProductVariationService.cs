@@ -15,9 +15,9 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
         {
         }
 
-        public List<ProductVariation> GetByCategory(long categoryId)
+        public async Task<List<ProductVariation>> GetByCategory(long categoryId)
         {
-            return _context.Set<ProductVariation>().Where(v => v.CategoryId == categoryId).ToList();
+            return await _context.Set<ProductVariation>().Where(v => v.CategoryId == categoryId).ToListAsync();
         }
     }
 }

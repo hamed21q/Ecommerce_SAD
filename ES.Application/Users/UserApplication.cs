@@ -6,8 +6,6 @@ using ES.Application.Contracts.Users.User.ViewModels;
 using ES.Application.Contracts.Users.UserAddress;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Users.User;
-using ES.Domain.Entities.Users.UserAddress;
-using System.Linq.Expressions;
 using System.Security.Cryptography;
 
 namespace ES.Application.Users
@@ -24,14 +22,14 @@ namespace ES.Application.Users
             this.addressApplication = addressApplication;
         }
 
-        public void Add(CreateUserCommand command)
+        public async Task Add(CreateUserCommand command)
         {
-            long addressId = addressApplication.Add(command.address);
+            long addressId = await addressApplication.Add(command.address);
             CreateHash(command.Password, out byte[] salt, out byte[] pass);
 
             User user = new User(command.EmailAddress, command.PhoneNumber, pass, salt, addressId);
-            userService.Add(user);
-            unitOfWork.Save();
+            await userService.Add(user);
+            await unitOfWork.Save();
         }
         private void CreateHash(string password, out byte[] salt, out byte[] hashed)
         {
@@ -42,27 +40,22 @@ namespace ES.Application.Users
             }
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var user = userService.GetBy(id);
+            var user = await userService.GetBy(id);
             user.Delete();
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditUserCommand command)
+        public async Task<UserViewModel> FindByEmail(string email)
         {
-            
+            var user = await userService.FindByEmail(email);
+            return await GetBy(user.Id);
         }
 
-        public UserViewModel FindByEmail(string email)
+        public async Task<UserViewModel> GetBy(long id)
         {
-            var user = userService.FindByEmail(email);
-            return GetBy(user.Id);
-        }
-
-        public UserViewModel GetBy(long id)
-        {
-            var user = userService.GetBy(id);
+            var user = await userService.GetBy(id);
             return new UserViewModel
             {
                 Id = id,
@@ -73,9 +66,9 @@ namespace ES.Application.Users
             };
         }
 
-        public bool Login(LoginUserCommand command)
+        public async Task<bool> Login(LoginUserCommand command)
         {
-            var user = userService.FindByEmail(command.EmailAddress);
+            var user = await userService.FindByEmail(command.EmailAddress);
             if (user == null) return false;
             return VerifyPasswordHash(command.Password, user.Password, user.PasswordSalt);
         }
@@ -88,10 +81,10 @@ namespace ES.Application.Users
             }
         }
 
-        public void EditRole(long id, string roleName)
+        public async Task EditRole(long id, string roleName)
         {
-            userService.SetAdmin(id, roleName);
-            unitOfWork.Save();
+            await userService.SetAdmin(id, roleName);
+            await unitOfWork.Save();
         }
     }
 }

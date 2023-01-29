@@ -10,10 +10,10 @@ namespace ES.Application.Contracts.Users.Country
 {
     public interface ICountryApplication
     {
-        void Add(CreateCountryCommand command);
-        void Edit(EditCoutnryCommand command);
-        CoutryViewModels GetdBy(long id);
-        List<CoutryViewModels> GetAll();
-        void Delete(long id);
+        Task Add(CreateCountryCommand command);
+        Task Edit(EditCoutnryCommand command);
+        Task<CoutryViewModels> GetdBy(long id);
+        Task<List<CoutryViewModels>> GetAll();
+        Task Delete(long id);
     }
 }

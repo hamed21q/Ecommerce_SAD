@@ -28,24 +28,25 @@ namespace ES.Presentation.Controllers.Users
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public UserViewModel Get(long id)
+        public async Task<UserViewModel> Get(long id)
         {
-            return userApplication.GetBy(id);
+            return await userApplication.GetBy(id);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] CreateUserCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
-            userApplication.Add(command);
+            await userApplication.Add(command);
+            return Ok();
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginUserCommand command)
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            var result = userApplication.Login(command);
+            var result = await userApplication.Login(command);
             if (result)
             {
-                var user = userApplication.FindByEmail(command.EmailAddress);
+                var user = await userApplication.FindByEmail(command.EmailAddress);
                 return Ok( new LoginViewModel
                 {
                     User = user,
@@ -61,7 +62,7 @@ namespace ES.Presentation.Controllers.Users
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.EmailAddress),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -73,22 +74,19 @@ namespace ES.Presentation.Controllers.Users
             return jwt;
         }
 
-        [HttpPut]
-        public void Put([FromBody] EditUserCommand command)
-        {
-            userApplication.Edit(command);
-        }
         [HttpPost("setAdmin")]
         [Authorize(Roles = "owner")]
-        public void QualifyToAdmin(long id)
+        public async Task<IActionResult> QualifyToAdmin(long id)
         {
-            userApplication.EditRole(id, "admin");
+            await userApplication.EditRole(id, "admin");
+            return Ok();
         }
         [HttpPost("setOwner")]
         [Authorize(Roles = "owner")]
-        public void QualifyToOwner(long id)
+        public async Task<IActionResult> QualifyToOwner(long id)
         {
-            userApplication.EditRole(id, "owner");
+            await userApplication.EditRole(id, "owner");
+            return Ok();
         }
     }
 }

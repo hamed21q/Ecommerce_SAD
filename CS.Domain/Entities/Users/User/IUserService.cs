@@ -6,7 +6,7 @@ namespace ES.Domain.Entities.Users.User
 {
     public interface IUserService : IRepository<long, User>
     {
-        User FindByEmail(string email);
-        void SetAdmin(long id, string roleName);
+        Task<User> FindByEmail(string email);
+        Task SetAdmin(long id, string roleName);
     }
 }

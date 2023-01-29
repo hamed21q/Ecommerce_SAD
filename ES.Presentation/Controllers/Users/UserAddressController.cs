@@ -18,30 +18,33 @@ namespace ES.Presentation.Controllers.Users
 
         // GET api/<UserAddressController>/5
         [HttpGet("{id}")]
-        public UserAddressViewModel Get(long id)
+        public async Task<UserAddressViewModel> Get(long id)
         {
-            return addressApplication.GetBy(id);
+            return await addressApplication.GetBy(id);
         }
 
         // POST api/<UserAddressController>
         [HttpPost]
-        public void Post([FromBody] CreateUserAddressComand command)
+        public async Task<IActionResult> Post([FromBody] CreateUserAddressComand command)
         {
-            addressApplication.Add(command);
+            await addressApplication.Add(command);
+            return Ok();
         }
 
         // PUT api/<UserAddressController>/5
         [HttpPut]
-        public void Put([FromBody] EditUserAddressCommand command)
+        public async Task<IActionResult> Put([FromBody] EditUserAddressCommand command)
         {
-            addressApplication.Edit(command);
+            await addressApplication.Edit(command);
+            return Ok();
         }
 
         // DELETE api/<UserAddressController>/5
         [HttpDelete("{id}")]
-        public void Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            addressApplication.Delete(id);
+            await addressApplication.Delete(id);
+            return Ok();
         }
     }
 }

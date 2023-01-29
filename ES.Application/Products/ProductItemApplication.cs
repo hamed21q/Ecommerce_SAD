@@ -29,14 +29,14 @@ namespace ES.Application.Products
             this.productItemService = productItemService;
         }
 
-        public void Add(CreateProductItemCommand command)
+        public async Task Add(CreateProductItemCommand command)
         {
             var item = new ProductItem(command.ProductId, command.Quantity, command.Price);
-            productItemService.Add(item);
-            unitOfWork.Save();
+            await productItemService.Add(item);
+            await unitOfWork.Save();
             AddConfigurations(item.Id, command.configurations);
         }
-        private void AddConfigurations(long itemId, List<long> variationIds)
+        private async Task AddConfigurations(long itemId, List<long> variationIds)
         {
             var configurationCommands = new List<CreateProductConfigurationCommand>();
             foreach (var vId in variationIds)
@@ -47,38 +47,37 @@ namespace ES.Application.Products
                     VariationOptionId = vId
                 });
             }
-            configurationApplication.Add(configurationCommands);
+            await configurationApplication.Add(configurationCommands);
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var item = productItemService.GetBy(id);
+            var item = await productItemService.GetBy(id);
             productItemService.Delete(item);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditProductItemCommand command)
+        public async Task Edit(EditProductItemCommand command)
         {
-            var item = productItemService.GetBy(command.Id);
+            var item = await productItemService.GetBy(command.Id);
             item.Edit(command.ProductId, command.Quantity, command.Price);
-            unitOfWork.Save();
+            await unitOfWork.Save();
 
         }
 
-        public ProductItemViewModel GetBy(long id)
+        public async Task<ProductItemViewModel> GetBy(long id)
         {
-            var item = productItemService.GetBy(id);
-            return Convert(item);
+            var item = await productItemService.GetBy(id);
+            return await Convert(item);
         }
-        public List<ProductItemViewModel> GetAllSibllings(long productId)
+        public async Task<List<ProductItemViewModel>> GetAllSibllings(long productId)
         {
-            var items = productItemService.GetAllSibllings(productId);
+            var items = await productItemService.GetAllSibllings(productId);
             var view = new List<ProductItemViewModel>();
-            items.ForEach(i => view.Add(Convert(i)));
+            items.ForEach(async i => view.Add(await Convert(i)));
             return view;
-
         }
-        private ProductItemViewModel Convert(ProductItem item)
+        private async Task<ProductItemViewModel> Convert(ProductItem item)
         {
             return new ProductItemViewModel
             {
@@ -86,7 +85,7 @@ namespace ES.Application.Products
                 ProductId = item.ProductId,
                 Quantity = item.Quantity,
                 Price = item.Price,
-                Configurations = configurationApplication.GetConfigurations(item.Id)
+                Configurations = await configurationApplication.GetConfigurations(item.Id)
             };
         }
     }

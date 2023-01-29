@@ -22,35 +22,35 @@ namespace ES.Application.Users
             this.userRoleService = userRoleService;
         }
 
-        public void Add(CreateUserRoleCommand command)
+        public async Task Add(CreateUserRoleCommand command)
         {
             var role = new UserRole(command.Name);
-            userRoleService.Add(role);
-            unitOfWork.Save();
+            await userRoleService.Add(role);
+            await unitOfWork.Save();
         }
 
-        public void Delete(long Id)
+        public async Task Delete(long Id)
         {
-            var item = userRoleService.GetBy(Id);
+            var item = await userRoleService.GetBy(Id);
             userRoleService.Delete(item);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditUserRoleCommand command)
+        public async Task Edit(EditUserRoleCommand command)
         {
-            var role = userRoleService.GetBy(command.Id);
+            var role = await userRoleService.GetBy(command.Id);
             role.Edit(command.Name);
             unitOfWork.Save();
         }
 
-        public bool Exist(long id)
+        public async Task<bool> Exist(long id)
         {
-            return userRoleService.Exist(r => r.Id == id);
+            return await userRoleService.Exist(r => r.Id == id);
         }
 
-        public List<UserRoleViewModel> GetAll()
+        public async Task<List<UserRoleViewModel>> GetAll()
         {
-            var list = userRoleService.GetAll();
+            var list =await userRoleService.GetAll();
             var views = new List<UserRoleViewModel>();  
             foreach (var item in list)
             {
@@ -63,9 +63,9 @@ namespace ES.Application.Users
             return views;
         }
 
-        public UserRoleViewModel GetBy(long id)
+        public async Task<UserRoleViewModel> GetBy(long id)
         {
-            var role = userRoleService.GetBy(id);
+            var role = await userRoleService.GetBy(id);
             return new UserRoleViewModel
             {
                 Id = id,

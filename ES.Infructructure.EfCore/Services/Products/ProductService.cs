@@ -12,29 +12,29 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             products = new List<Product>();
         }
 
-        public double GetMinimumPrice(long id)
+        public async Task<double> GetMinimumPrice(long id)
         {
-            var product = GetBy(id);
+            var product = await GetBy(id);
             var item = product.ProductItems.MinBy(x => x.Price);
             if(item != null) { return item.Price; }
             return 0;
         }
 
-        public int GetTotalQuantity(long id)
+        public async Task<int> GetTotalQuantity(long id)
         {
-            var product = GetBy(id);
+            var product = await GetBy(id);
             int sum = 0;
             product.ProductItems.ForEach(x => sum += x.Quantity);
             return sum;
         }
         private List<Product> products;
-        public List<Product> GetByCategory(long categoryId)
+        public async Task<List<Product>> GetByCategory(long categoryId)
         {
-            var category = context.productCategories.Find(categoryId);
+            var category = await context.productCategories.FindAsync(categoryId);
             products.AddRange(category.Products);
             foreach (var item in category.ChildeCategories)
             {
-                GetByCategory(item.Id);
+                await GetByCategory(item.Id);
             }
             return products;
         }

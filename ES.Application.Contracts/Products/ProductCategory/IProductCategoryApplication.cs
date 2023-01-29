@@ -5,12 +5,12 @@ namespace ES.Application.Contracts.Products.ProductCategory
 {
     public interface IProductCategoryApplication
     {
-        void Add(CreateProductCategoryCommand command);
-        List<ProductCategoryViewModel> GetAll();
-        bool IsValid(long id);
-        DetailedProductCategoryViewModel GetBy(long id);
-        void Edit(EditProductCategoryCommand command);
-        void Remove(long id);
-        void Activate(long id);
+        Task Add(CreateProductCategoryCommand command);
+        Task<List<ProductCategoryViewModel>> GetAll();
+        Task<bool> IsValid(long id);
+        Task<DetailedProductCategoryViewModel> GetBy(long id);
+        Task Edit(EditProductCategoryCommand command);
+        Task Remove(long id);
+        Task Activate(long id);
     }
 }

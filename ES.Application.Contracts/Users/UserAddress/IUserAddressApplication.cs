@@ -6,9 +6,9 @@ namespace ES.Application.Contracts.Users.UserAddress
     public interface IUserAddressApplication
     {
         UserAddressViewModel Convert(Domain.Entities.Users.UserAddress.UserAddress address);
-        long Add(CreateUserAddressComand command);
-        void Edit(EditUserAddressCommand command);
-        void Delete(long id);
-        UserAddressViewModel GetBy(long id);
+        Task<long> Add(CreateUserAddressComand command);
+        Task Edit(EditUserAddressCommand command);
+        Task Delete(long id);
+        Task<UserAddressViewModel> GetBy(long id);
     }
 }

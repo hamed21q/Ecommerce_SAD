@@ -4,10 +4,10 @@ namespace ES.Domain.DomainService
 {
     public interface IRepository<TKey, T>
     {
-        void Add(T entity);
-        T GetBy(TKey id);
-        ICollection<T> GetAll();
-        bool Exist(Expression<Func<T, bool>> expr);
+        Task Add(T entity);
+        Task<T> GetBy(TKey id);
+        Task<ICollection<T>> GetAll();
+        Task<bool> Exist(Expression<Func<T, bool>> expr);
         void Delete(T entity);
     }
 }

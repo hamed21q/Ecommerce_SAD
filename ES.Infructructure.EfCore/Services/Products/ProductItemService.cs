@@ -16,16 +16,16 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             this.context = context;
         }
 
-        public List<ProductItem> GetAllSibllings(long productId)
+        public async Task<List<ProductItem>> GetAllSibllings(long productId)
         {
-            var product = context.products.Find(productId);
+            var product = await context.products.FindAsync(productId);
             if(product == null) { throw new ArgumentException(); }
             return product.ProductItems;
         }
 
-        public List<ProductConfiguration> GetConfiguration(long id)
+        public async Task<List<ProductConfiguration>> GetConfiguration(long id)
         {
-            var item = GetBy(id);
+            var item = await GetBy(id);
             return item.Configurations;
         }
     }

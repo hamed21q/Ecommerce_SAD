@@ -18,30 +18,30 @@ namespace ES.Application.Users
             this.unitOfWork = unitOfWork;
         }
 
-        public void Add(CreateCountryCommand command)
+        public async Task Add(CreateCountryCommand command)
         {
             var country = new Country(command.Name);
-            countryService.Add(country);
-            unitOfWork.Save();
+            await countryService.Add(country);
+            await unitOfWork.Save();
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
-            var country = countryService.GetBy(id);
+            var country = await countryService.GetBy(id);
             countryService.Delete(country);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public void Edit(EditCoutnryCommand command)
+        public async Task Edit(EditCoutnryCommand command)
         {
-            var country = countryService.GetBy(command.Id);
+            var country = await countryService.GetBy(command.Id);
             country.Edit(command.Name);
-            unitOfWork.Save();
+            await unitOfWork.Save();
         }
 
-        public List<CoutryViewModels> GetAll()
+        public async Task<List<CoutryViewModels>> GetAll()
         {
-            var list = countryService.GetAll();
+            var list = await countryService.GetAll();
             var views = new List<CoutryViewModels>();
             foreach (var country in list)
             {
@@ -55,9 +55,9 @@ namespace ES.Application.Users
             return views;
         }
 
-        public CoutryViewModels GetdBy(long id)
+        public async Task<CoutryViewModels> GetdBy(long id)
         {
-            var country = countryService.GetBy(id);
+            var country = await countryService.GetBy(id);
             return new CoutryViewModels
             {
                 Id = country.Id,

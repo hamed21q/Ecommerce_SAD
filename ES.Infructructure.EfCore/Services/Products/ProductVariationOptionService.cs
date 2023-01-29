@@ -1,5 +1,6 @@
 ﻿using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Infructructure.EfCore.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace ES.Infructructure.EfCore.Services.Products.Products
 {
@@ -9,9 +10,9 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
         {
         }
 
-        public List<ProductVariationOption> GetbyVariation(long variationId)
+        public async Task<List<ProductVariationOption>> GetbyVariation(long variationId)
         {
-            return _context.Set<ProductVariationOption>().Where(pvo => pvo.VariationId == variationId).ToList();
+            return await _context.Set<ProductVariationOption>().Where(pvo => pvo.VariationId == variationId).ToListAsync();
         }
     }
 }

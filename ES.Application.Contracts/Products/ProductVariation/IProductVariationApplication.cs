@@ -11,13 +11,13 @@ namespace ES.Application.Contracts.Products.ProductVariation
     public interface IProductVariationApplication
     {
 
-        void Add(CreateProductVariationCommand command);
-        void Edit(EditProductVariationCommand command);
-        ProductVariationViewModel GetBy(long id);
-        List<ProductVariationViewModel> GetAll();
-        List<DetailedProductVariationViewModel> GetByCategory(long categoryId);
+        Task Add(CreateProductVariationCommand command);
+        Task Edit(EditProductVariationCommand command);
+        Task<ProductVariationViewModel> GetBy(long id);
+        Task<List<ProductVariationViewModel>> GetAll();
+        Task<List<DetailedProductVariationViewModel>> GetByCategory(long categoryId);
 
-        void Remove(long id);
-        bool IsValid(long id);
+        Task Remove(long id);
+        Task<bool> IsValid(long id);
     }
 }
