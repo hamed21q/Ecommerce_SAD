@@ -24,6 +24,12 @@ namespace ES.Presentation.Controllers.Products
             return list;
         }
 
+        [HttpGet("Loadbalancertest")]
+        public string nginx()
+        {
+            return "Hostname: " + System.Environment.MachineName + "\n" + "Container ID: " + System.Diagnostics.Process.GetCurrentProcess().Id;
+        }
+
         [HttpGet("{id}")]
         public async Task<ProductCategoryViewModel> Get(long id)
         {

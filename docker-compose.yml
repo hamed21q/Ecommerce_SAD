@@ -16,10 +16,7 @@ services:
     volumes:
       - "./data:/var/opt/mssql/data" 
   es.presentation:
-    container_name: es.api
     image: ${DOCKER_REGISTRY-}espresentation 
-    ports:
-      - 8002:80 
     build:
       context: .
       dockerfile: ES.Presentation/Dockerfile
@@ -31,6 +28,8 @@ services:
       - DB_SA_PASSWORD=H@med1369
     depends_on:
       - es.db
+    deploy:
+      replicas: 3
   es.balancer:
     container_name: es.balancer
     image: nginx:latest
@@ -38,5 +37,7 @@ services:
       - "./conf.d:/etc/nginx/conf.d"
     ports:
       -  "8004:80"
+    networks:
+      - backend
     depends_on:
       - es.presentation
