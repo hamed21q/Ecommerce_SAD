@@ -10,7 +10,6 @@ using ES.Domain.Entities.Users.Role;
 using ES.Domain.Entities.Users.User;
 using ES.Domain.Entities.Users.UserAddress;
 using ES.Infructructure.EfCore.Mappings.Products;
-using ES.Infructructure.EfCore.Mappings.ShoppingCart;
 using ES.Infructructure.EfCore.Mappings.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -48,9 +47,6 @@ namespace ES.Infructructure.EfCore
             modelBuilder.ApplyConfiguration(new ProductVariationOptionMapping());
             modelBuilder.ApplyConfiguration(new ProductItemMapping());
             modelBuilder.ApplyConfiguration(new ProductMapping());
-            modelBuilder.ApplyConfiguration(new ShoppingCartItemMapping());
-            modelBuilder.ApplyConfiguration(new ShoppingCartMapping());
-
 
             base.OnModelCreating(modelBuilder);
         }

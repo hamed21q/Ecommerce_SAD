@@ -1,7 +1,5 @@
-﻿using ES.Application.Contracts.Products.Product;
-using ES.Application.Contracts.Products.ProductConfiguration;
+﻿using ES.Application.Contracts.Products.ProductConfiguration;
 using ES.Application.Contracts.Products.ProductConfiguration.DTOs;
-using ES.Application.Contracts.Products.ProductConfiguration.ViewModel;
 using ES.Application.Contracts.Products.ProductImage;
 using ES.Application.Contracts.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductItem.DTOs;

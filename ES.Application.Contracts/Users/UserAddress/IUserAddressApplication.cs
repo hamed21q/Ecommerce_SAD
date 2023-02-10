@@ -1,6 +1,5 @@
 ﻿using ES.Application.Contracts.Users.UserAddress.DTOs;
 using ES.Application.Contracts.Users.UserAddress.ViewModel;
-using ES.Domain.Entities.Users.UserAddress;
 
 namespace ES.Application.Contracts.Users.UserAddress
 {

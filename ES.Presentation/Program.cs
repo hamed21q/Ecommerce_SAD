@@ -2,14 +2,7 @@ using ES.Infructructure.EfCore;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using ES.Domain.DomainService;
 using ES.Infructructure.EfCore.Base;
-using ES.Domain.Entities.Products.Product;
-using ES.Domain.Entities.Products.ProductVariationOption;
-using ES.Domain.Entities.Products.ProductVariation;
-using ES.Domain.Entities.Products.ProductCategory;
-using ES.Domain.Entities.Products.ProductConfiguration;
-using ES.Domain.Entities.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductVariationOption.DTOs;
 using ES.Application.Contracts.Products.ProductVariationOption.Validations;
 using ES.Application.Contracts.Products.ProductVariationOption;
@@ -28,14 +21,10 @@ using ES.Application.Products;
 using ES.Infructructure.EfCore.Services.Products.Products;
 using ES.Application.Contracts.Users.Role;
 using ES.Application.Users;
-using ES.Domain.Entities.Users.Role;
 using ES.Infructructure.EfCore.Services.Users;
 using ES.Application.Contracts.Users.Country;
-using ES.Domain.Entities.Users.Country;
 using ES.Application.Contracts.Users.UserAddress;
-using ES.Domain.Entities.Users.UserAddress;
 using ES.Application.Contracts.Users.User;
-using ES.Domain.Entities.Users.User;
 using ES.Application.Contracts.Users.User.Validations;
 using ES.Application.Contracts.Users.User.DTOs.Login;
 using ES.Application.Contracts.Users.User.DTOs.Register;
@@ -44,6 +33,21 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using ES.Domain.Entities.Products.ProductCategory;
+using ES.Domain.Entities.Products.Product;
+using ES.Domain.Entities.Products.ProductVariation;
+using ES.Domain.Entities.Products.ProductVariationOption;
+using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductConfiguration;
+using ES.Domain.Entities.Users.Role;
+using ES.Domain.Entities.Users.Country;
+using ES.Domain.Entities.Users.UserAddress;
+using ES.Domain.Entities.Users.User;
+using ES.Domain.DomainService;
+using ES.Domain.Entities.Products.ProductItemImage;
+using ES.Infructructure.EfCore.Services.Products;
+using ES.Domain.Entities.ShoppingCart.ShoppingCart;
+using ES.Infrustructure.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -138,7 +142,9 @@ builder.Services.AddTransient<IUserAddressService, UserAddressService>();
 builder.Services.AddTransient<IUserApplication, UserApplication>();
 builder.Services.AddTransient<IUserService, UserService>();
 
+builder.Services.AddTransient<IProductImageService, ProductImageService>();
 
+builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
@@ -158,6 +164,10 @@ else
     builder.Services.AddDbContext<EcommerceContext>(option => option
     .UseLazyLoadingProxies()
     .UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce")));
+    builder.Services.AddStackExchangeRedisCache(option =>
+    {
+        option.Configuration = builder.Configuration.GetValue<string>("CachSettings:ConnectionString");
+    });
 }
 
 

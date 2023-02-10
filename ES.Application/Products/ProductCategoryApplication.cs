@@ -1,10 +1,8 @@
-﻿using ES.Application.Contracts.Products.Product.ViewModels;
-using ES.Application.Contracts.Products.ProductCategory;
+﻿using ES.Application.Contracts.Products.ProductCategory;
 using ES.Application.Contracts.Products.ProductCategory.DTOs;
 using ES.Application.Contracts.Products.ProductCategory.ViewModels;
 using ES.Domain.DomainService;
 using ES.Domain.Entities.Products.ProductCategory;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Globalization;
 
 namespace ES.Application.Products

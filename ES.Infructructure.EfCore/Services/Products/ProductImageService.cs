@@ -11,7 +11,7 @@ namespace ES.Infructructure.EfCore.Services.Products
 {
     public class ProductImageService : Repository<long, ProductImage>, IProductImageService
     {
-        public ProductImageService(DbContext context) : base(context)
+        public ProductImageService(EcommerceContext context) : base(context)
         {
         }
     }

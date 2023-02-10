@@ -7,13 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Products\ProductItem\Validations\" />
-    <Folder Include="Users\UserAddress\Validation\" />
-    <Folder Include="Users\UserRole\Validations\" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <ItemGroup>
