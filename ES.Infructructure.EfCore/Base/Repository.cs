@@ -14,7 +14,7 @@ namespace ES.Infructructure.EfCore.Base
             _context = context;
         }
 
-        public async Task Add(T entity)
+        public virtual async Task Add(T entity)
         {
             await _context.AddAsync(entity);
         }

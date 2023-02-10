@@ -2,6 +2,7 @@
 using ES.Domain.Entities.Products.ProductCategory;
 using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductItemImage;
 using ES.Domain.Entities.Products.ProductVariation;
 using ES.Domain.Entities.Products.ProductVariationOption;
 using ES.Domain.Entities.Users.Country;
@@ -29,6 +30,7 @@ namespace ES.Infructructure.EfCore
         public DbSet<User> users { get; set; }
         public DbSet<UserAddress> userAddresses { get; set; }
         public DbSet<ProductConfiguration> productConfigurations { get; set; }
+        public DbSet<ProductImage> productImages { get; set; }
         public EcommerceContext(DbContextOptions<EcommerceContext> context) : base(context) 
         {
 

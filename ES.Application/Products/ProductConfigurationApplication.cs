@@ -50,9 +50,9 @@ namespace ES.Application.Products
                 Value = option.VariationOption.Value
             };
         }
-        public async Task<List<ProductConfigurationViewModel>> GetConfigurations(long productItemId)
+        public List<ProductConfigurationViewModel> GetConfigurations(long productItemId)
         {
-            var configs = await productConfigurationService.GetConfigsByProductItem(productItemId);
+            var configs = productConfigurationService.GetConfigsByProductItem(productItemId);
             var view = new List<ProductConfigurationViewModel>();
             configs.ForEach(c => view.Add(Convert(c)));
             return view;

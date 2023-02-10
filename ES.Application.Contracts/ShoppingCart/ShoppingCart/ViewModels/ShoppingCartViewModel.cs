@@ -10,5 +10,6 @@ namespace ES.Application.Contracts.ShoppingCard.ShoppingCard.ViewModels
     {
         public long Id { get; set; }
         public long UserId { get; set; }
+        public int TotalPrice { get; set; }
     }
 }

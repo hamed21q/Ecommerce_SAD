@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CS.Domain\ES.Domain.csproj" />
     <ProjectReference Include="..\ES.Application.Contracts\ES.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ES.Domain\ES.Domain.csproj" />
     <ProjectReference Include="..\ES.Infructructure.EfCore\ES.Infructructure.EfCore.csproj" />
   </ItemGroup>
 

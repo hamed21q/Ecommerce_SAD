@@ -12,9 +12,13 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
             this.context = context;
         }
 
-        public async Task<List<ProductConfiguration>> GetConfigsByProductItem(long productItemId)
+        public async Task<List<ProductConfiguration>> GetConfigsByProductItemAsync(long productItemId)
         {
             return await context.productConfigurations.Where(c => c.ProductItemId == productItemId).ToListAsync();
+        }
+        public List<ProductConfiguration> GetConfigsByProductItem(long productItemId)
+        {
+            return context.productConfigurations.Where(c => c.ProductItemId == productItemId).ToList();
         }
     }
 }

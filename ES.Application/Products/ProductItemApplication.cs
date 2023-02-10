@@ -2,12 +2,13 @@
 using ES.Application.Contracts.Products.ProductConfiguration;
 using ES.Application.Contracts.Products.ProductConfiguration.DTOs;
 using ES.Application.Contracts.Products.ProductConfiguration.ViewModel;
+using ES.Application.Contracts.Products.ProductImage;
 using ES.Application.Contracts.Products.ProductItem;
 using ES.Application.Contracts.Products.ProductItem.DTOs;
 using ES.Application.Contracts.Products.ProductItem.ViewModels;
 using ES.Domain.DomainService;
-using ES.Domain.Entities.Products.Product;
 using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductItemImage;
 
 namespace ES.Application.Products
 {
@@ -16,25 +17,44 @@ namespace ES.Application.Products
         private readonly IProductItemService productItemService;
         private readonly IUnitOfWork unitOfWork;
         private readonly IProductConfigurationApplication configurationApplication;
+        private readonly IProductImageService imageService;
 
         public ProductItemApplication(
             IProductItemService productItemService,
             IUnitOfWork unitOfWork,
             IProductConfigurationApplication productConfigurationApplication
-        )
+,
+            IProductImageService imageService)
         {
             this.configurationApplication = productConfigurationApplication;
             this.productItemService = productItemService;
             this.unitOfWork = unitOfWork;
             this.productItemService = productItemService;
+            this.imageService = imageService;
         }
 
         public async Task Add(CreateProductItemCommand command)
         {
+            
             var item = new ProductItem(command.ProductId, command.Quantity, command.Price);
+            var images = new List<ProductImage>();
+            foreach (var imagedto in command.Images)
+            {
+                var image = new ProductImage(imagedto.productItemId, imagedto.Image);
+                images.Add(image);
+            }
             await productItemService.Add(item);
             await unitOfWork.Save();
-            AddConfigurations(item.Id, command.configurations);
+            foreach (var image in images)
+            {
+                image.ProductItemId = command.ProductId;
+                await imageService.Add(image);
+            }
+            await AddConfigurations(item.Id, command.configurations);
+        }
+        public async Task AddImage(CreateProduceImageCommand command)
+        {
+            await imageService.Add(new ProductImage(command.productItemId, command.Image));
         }
         private async Task AddConfigurations(long itemId, List<long> variationIds)
         {
@@ -62,22 +82,26 @@ namespace ES.Application.Products
             var item = await productItemService.GetBy(command.Id);
             item.Edit(command.ProductId, command.Quantity, command.Price);
             await unitOfWork.Save();
-
         }
 
         public async Task<ProductItemViewModel> GetBy(long id)
         {
             var item = await productItemService.GetBy(id);
-            return await Convert(item);
+            return Convert(item);
         }
         public async Task<List<ProductItemViewModel>> GetAllSibllings(long productId)
         {
             var items = await productItemService.GetAllSibllings(productId);
             var view = new List<ProductItemViewModel>();
-            items.ForEach(async i => view.Add(await Convert(i)));
+            items.ForEach(i => view.Add(Convert(i)));
             return view;
         }
-        private async Task<ProductItemViewModel> Convert(ProductItem item)
+        public async Task RemoveImage(long imageId)
+        {
+            var image = await imageService.GetBy(imageId);
+            productItemService.RemoveImage(image);
+        }
+        private ProductItemViewModel Convert(ProductItem item)
         {
             return new ProductItemViewModel
             {
@@ -85,7 +109,7 @@ namespace ES.Application.Products
                 ProductId = item.ProductId,
                 Quantity = item.Quantity,
                 Price = item.Price,
-                Configurations = await configurationApplication.GetConfigurations(item.Id)
+                Configurations = configurationApplication.GetConfigurations(item.Id)
             };
         }
     }

@@ -2,9 +2,11 @@
 using ES.Domain.Entities.Products.ProductCategory;
 using ES.Domain.Entities.Products.ProductConfiguration;
 using ES.Domain.Entities.Products.ProductItem;
+using ES.Domain.Entities.Products.ProductItemImage;
 using ES.Domain.Entities.Products.ProductVariation;
 using ES.Infructructure.EfCore.Base;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ES.Infructructure.EfCore.Services.Products.Products
 {
@@ -14,6 +16,13 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
         public ProductItemService(EcommerceContext context) : base(context)
         {
             this.context = context;
+        }
+
+        public async Task AddImage(long itemid, ProductImage image)
+        {
+            image.ProductItemId = itemid;
+            await context.productImages.AddAsync(image);
+            context.SaveChanges();
         }
 
         public async Task<List<ProductItem>> GetAllSibllings(long productId)
@@ -27,6 +36,11 @@ namespace ES.Infructructure.EfCore.Services.Products.Products
         {
             var item = await GetBy(id);
             return item.Configurations;
+        }
+
+        public void RemoveImage(ProductImage image)
+        {
+            context.productImages.Remove(image);
         }
     }
 }
