@@ -27,8 +27,8 @@ namespace ES.Infrustructure.Redis
 
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart shopingCart)
         {
-            await redis.SetStringAsync(shopingCart.Username, JsonConvert.SerializeObject(shopingCart));
-            return await GetBasket(shopingCart.Username);
+            await redis.SetStringAsync(shopingCart.UserId.ToString(), JsonConvert.SerializeObject(shopingCart));
+            return await GetBasket(shopingCart.UserId.ToString());
         }
     }
 }

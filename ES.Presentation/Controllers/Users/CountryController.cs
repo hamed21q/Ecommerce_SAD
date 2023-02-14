@@ -18,14 +18,12 @@ namespace ES.Presentation.Controllers.Users
             this.countryApplication = countryApplication;
         }
 
-        // GET api/<CountryController>/5
         [HttpGet("{id}")]
         public async Task<CoutryViewModels> Get(long id)
         {
             return await countryApplication.GetdBy(id);
         }
 
-        // POST api/<CountryController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCountryCommand command)
         {
@@ -33,7 +31,6 @@ namespace ES.Presentation.Controllers.Users
             return Ok();
         }
 
-        // PUT api/<CountryController>/5
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] EditCoutnryCommand command)
         {
@@ -42,7 +39,6 @@ namespace ES.Presentation.Controllers.Users
 
         }
 
-        // DELETE api/<CountryController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

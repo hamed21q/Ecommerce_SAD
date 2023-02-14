@@ -24,12 +24,21 @@ services:
       - backend
     environment:
       - DB_HOST=es.db
-      - DB_NAME=ecommerce   
+      - DB_NAME=Ecommerce
       - DB_SA_PASSWORD=H@med1369
     depends_on:
       - es.db
     deploy:
       replicas: 3
+  es.redis:
+    image: redis
+    container_name: es.redis
+    ports:
+      - 8005:6379
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_CONNECTION_STRING=redis:8005
   es.balancer:
     container_name: es.balancer
     image: nginx:latest
@@ -41,3 +50,7 @@ services:
       - backend
     depends_on:
       - es.presentation
+  redis:
+    image: redis
+    ports:
+      - 6379:6379

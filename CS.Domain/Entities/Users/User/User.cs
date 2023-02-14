@@ -15,7 +15,6 @@ namespace ES.Domain.Entities.Users.User
 
         //navigation
         public virtual UserAddress.UserAddress Address { get; set; }
-        public virtual List<ShoppingCart.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
         public virtual UserRole Role { get; set; }
 
         public User (
@@ -25,7 +24,6 @@ namespace ES.Domain.Entities.Users.User
             byte[] salt,
             long addressId) : base()
         {
-            this.ShoppingCarts = new List<ShoppingCart.ShoppingCart.ShoppingCart>();
             EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;
             Password = password;

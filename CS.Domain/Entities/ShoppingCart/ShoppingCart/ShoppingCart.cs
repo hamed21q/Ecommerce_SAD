@@ -5,7 +5,7 @@ namespace ES.Domain.Entities.ShoppingCart.ShoppingCart
 {
     public class ShoppingCart
     {
-        public string Username { get; set; }
+        public long UserId { get; set; }
         public List<ShoppingCartItem> shopingCartItems { get; set; }
         public ShoppingCart()
         {

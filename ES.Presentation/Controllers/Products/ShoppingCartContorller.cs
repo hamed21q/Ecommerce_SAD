@@ -1,7 +1,9 @@
 ﻿using ES.Domain.Entities.ShoppingCart.ShoppingCart;
 using ES.Domain.Entities.Users.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Security.Claims;
 
 namespace Basket.Api.Controllers
 {
@@ -30,6 +32,7 @@ namespace Basket.Api.Controllers
         {
             return Ok(await repo.UpdateBasket(basket));
         }
+        
         [HttpDelete("{username}", Name = "DeleteBasket")]
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteBascket(string username)

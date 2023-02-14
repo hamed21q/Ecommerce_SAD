@@ -48,6 +48,10 @@ using ES.Domain.Entities.Products.ProductItemImage;
 using ES.Infructructure.EfCore.Services.Products;
 using ES.Domain.Entities.ShoppingCart.ShoppingCart;
 using ES.Infrustructure.Redis;
+using ES.Presentation.MiddlleWares;
+using ES.Presentation.Utility;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Distributed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -147,8 +151,35 @@ builder.Services.AddTransient<IProductImageService, ProductImageService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddTransient<IJwtUtils, JwtUtils>();
+builder.Services.AddTransient<JwtTokenMiddleware>();
 
-bool docker = false;
+string redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING");
+
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = redisConnectionString;
+});
+
+builder.Services.AddSingleton<IDistributedCache>(sp =>
+    sp.GetRequiredService<IDistributedCache>());
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+
+
+bool docker = true;
 if (docker)
 {
     var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
@@ -174,6 +205,7 @@ else
 
 
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -181,9 +213,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<JwtTokenMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
-app.Run();
+app.Run();  
+Console.ReadLine();

@@ -3,37 +3,39 @@ using ES.Application.Contracts.Users.User.DTOs;
 using ES.Application.Contracts.Users.User.DTOs.Login;
 using ES.Application.Contracts.Users.User.DTOs.Register;
 using ES.Application.Contracts.Users.User.ViewModels;
+using ES.Domain.Entities.Users.User;
+using ES.Infructructure.EfCore.Services.Users;
+using ES.Presentation.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 
 
 namespace ES.Presentation.Controllers.Users
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUserApplication userApplication;
         private readonly IConfiguration configuration;
+        private readonly IJwtUtils jwtUtils;
 
-        public UserController(IUserApplication userApplication, IConfiguration configuration)
+        public AuthController(IUserApplication userApplication, IConfiguration configuration, IJwtUtils jwtUtils)
         {
             this.userApplication = userApplication;
             this.configuration = configuration;
+            this.jwtUtils = jwtUtils;
         }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public async Task<UserViewModel> Get(long id)
         {
             return await userApplication.GetBy(id);
         }
 
-        // POST api/<UserController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
@@ -50,30 +52,12 @@ namespace ES.Presentation.Controllers.Users
                 return Ok( new LoginViewModel
                 {
                     User = user,
-                    Token = CreateToken(user)
+                    Token = jwtUtils.GenerateToken(user)
                 });
             }
             return BadRequest("Incorrect user credentials");
             
         }
-
-        private string CreateToken(UserViewModel user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, user.EmailAddress),
-                new Claim(ClaimTypes.Role, user.Role),
-            };
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                    claims: claims,
-                    expires: DateTime.Now.AddHours(1),
-                    signingCredentials: cred);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-            return jwt;
-        }
-
         [HttpPost("setAdmin")]
         [Authorize(Roles = "owner")]
         public async Task<IActionResult> QualifyToAdmin(long id)
@@ -88,5 +72,14 @@ namespace ES.Presentation.Controllers.Users
             await userApplication.EditRole(id, "owner");
             return Ok();
         }
+        [HttpGet("Test")]
+        [Authorize(Roles = "admin")]
+        public async Task<UserViewModel> getUser()
+        {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value;
+            var id = long.Parse(userIdClaim);
+            return await userApplication.GetBy(id);
+        }
+
     }
 }
