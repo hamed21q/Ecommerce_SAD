@@ -106,6 +106,11 @@ namespace ES.Application.Products
             return await itemApplication.GetAllSibllings(id);
         }
 
+        public async Task<List<Product>> Search(string text)
+        {
+
+        }
+
        
     }
 }

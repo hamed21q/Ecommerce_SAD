@@ -64,9 +64,8 @@ namespace ES.Application.Products
         public async Task<DetailedProductCategoryViewModel> GetBy(long id)
         {
             var productCategory = await productCategoryService.GetBy(id);
-            var childView = new List<ProductCategoryViewModel>();
-            var subCategories = await productCategoryService.GetSubCategories(id);
-            subCategories.ForEach(c => childView.Add(convert(c)));
+            var childView = new List<DetailedProductCategoryViewModel>();
+            productCategory.ChildeCategories.ForEach(c => childView.Add(convert(c)));
             return new DetailedProductCategoryViewModel
             {
                 Id = productCategory.Id,
@@ -75,19 +74,25 @@ namespace ES.Application.Products
                 IsDeleted = productCategory.IsDeleted,
                 Parent = productCategory.Parent?.Id,
                 Grade = productCategory.Grade,
-                childCategories = childView
+                Childs = childView
             };
         }
-        private ProductCategoryViewModel convert(ProductCategory p)
+        private DetailedProductCategoryViewModel convert(ProductCategory p)
         {
-            return new ProductCategoryViewModel
+            var childeren = new List<DetailedProductCategoryViewModel>();
+            foreach (var child in p.ChildeCategories)
+            {
+                childeren.Add(convert(child));
+            }
+            return new DetailedProductCategoryViewModel
             {
                 Id = p.Id,
                 CreationDate = p.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Grade = p.Parent.Grade + 1,
                 IsDeleted = p.IsDeleted,
                 Parent = p.ParentId,
-                Title = p.Title
+                Title = p.Title,
+                Childs = childeren
             };
         }
         public async Task<bool> IsValid(long id)

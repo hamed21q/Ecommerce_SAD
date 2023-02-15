@@ -2,6 +2,6 @@
 {
     public class DetailedProductCategoryViewModel : ProductCategoryViewModel
     {
-        public List<ProductCategoryViewModel> childCategories { get; set; }
+        public List<DetailedProductCategoryViewModel> Childs { get; set; }
     }
 }

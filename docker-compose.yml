@@ -50,7 +50,3 @@ services:
       - backend
     depends_on:
       - es.presentation
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
